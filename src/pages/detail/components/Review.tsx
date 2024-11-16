@@ -17,7 +17,7 @@ export const Review = () => {
                         <ReviewStar rating={3} />
                     </div>
                 </div>
-                <p>We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.</p>
+                <p className="text-sm font-normal leading-[200%] tracking-[-0.28px] mt-3 text-secondary-300">We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.</p>
             </div>
         </div>
     )
