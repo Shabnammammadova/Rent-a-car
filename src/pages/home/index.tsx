@@ -1,6 +1,7 @@
 import { Availability } from "@/components/shared/availabilty-filter"
 import { Hero } from "./components/Hero"
-import List from "./components/List"
+import List from "@/components/shared/RentList"
+
 
 
 
