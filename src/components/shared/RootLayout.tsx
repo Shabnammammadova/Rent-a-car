@@ -1,6 +1,8 @@
 
 import { Outlet } from "react-router-dom"
 import { Navbar } from "./navbar"
+import { Dialogs } from "./dialogs"
+
 
 
 const RootLayout = () => {
@@ -8,6 +10,7 @@ const RootLayout = () => {
         <div>
             <Navbar />
             <Outlet />
+            <Dialogs />
         </div>
     )
 }

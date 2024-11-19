@@ -1,5 +1,8 @@
+import DashboardLayout from "@/components/shared/DashboardLayout";
 import RootLayout from "@/components/shared/RootLayout";
 import { paths } from "@/constants/paths";
+import DashboardMainPage from "@/pages/(dashboard)/main";
+import DashboardRentsPage from "@/pages/(dashboard)/rents";
 import RentDetailPage from "@/pages/detail";
 import HomePage from "@/pages/home";
 import { RentListPage } from "@/pages/list";
@@ -26,7 +29,22 @@ export const router = createBrowserRouter([
             {
                 path: paths.PAYMENT,
                 element: <PaymentPage />
+            },
+            {
+                path: "",
+                element: <DashboardLayout />,
+                children: [
+                    {
+                        path: paths.DASHBOARD.MAIN,
+                        element: <DashboardMainPage />
+                    },
+                    {
+                        path: paths.DASHBOARD.RENT,
+                        element: <DashboardRentsPage />
+                    }
+                ]
             }
+
         ]
     },
 ]);

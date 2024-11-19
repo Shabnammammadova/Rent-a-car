@@ -2,9 +2,11 @@ import SettingsIcon from "@/assets/icons/settings.svg";
 import HeartIcon from "@/assets/icons/heart.svg";
 import NofiticationIcon from "@/assets/icons/notification.svg";
 import { Link } from "react-router-dom";
-import { User2Icon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ModalEnum, useDialog } from "@/hooks/useDialog";
 
 export const Actions = () => {
+    const { openDialog } = useDialog()
     return (
         <div className="flex gap-3 lg:gap-5">
             <Link
@@ -25,12 +27,10 @@ export const Actions = () => {
             >
                 <img src={SettingsIcon} alt="settings icon" />
             </Link>
-            <Link
-                to="/"
-                className="rounded-full border border-[#c3d4e966] opacity-80 hover:opacity-100 duration-75 p-2.5"
+            <Button onClick={() => openDialog(ModalEnum.LOGIN)}
             >
-                <User2Icon color="#596780" />
-            </Link>
-        </div>
+                Sign in
+            </Button>
+        </div >
     );
 };

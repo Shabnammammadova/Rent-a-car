@@ -3,7 +3,7 @@ import { ReviewStar } from "@/components/shared/ReviewStar"
 
 export const PaymentSummary = () => {
     return (
-        <div className="rounded-[10px] bg-white p-4 lg:p-6 h-fit">
+        <div className="rounded-[10px] bg-white p-4 lg:p-6 h-fit lg:sticky top-[160px] ">
             <h2 className="text-lg lg:text-xl font-bold leading-[150%] tracking-[-0.6px] text-secondary-500 ">Rental Summary</h2>
             <p className="text-secondary-300 text-sm font-medium leading-[150%] tracking-[-0.28px] mt-1 lg:mb-8 mb-6 ">Prices may change depending on the length of the rental and the price of your rental car.</p>
             <div className="flex items-center gap-x-4">
