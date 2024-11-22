@@ -25,12 +25,38 @@ const getAll = async (req: Request, res: Response) => {
     }
     if (category) {
         const categoryList = typeof category === "string" ? [category] : category
+        filter.category = { $in: categoryList }
+    }
+    if (min_price) {
+        filter.price = { $gte: min_price }
+    }
+    if (max_price) {
+        filter.price = { $lte: max_price }
+    }
+    if (pickup_location) {
+        filter.pickUpLocation = pickup_location
+    }
+    if (dropoff_location) {
+        filter.dropOffLocation = {
+            $elemMatch: {
+                location: dropoff_location
+            }
+        }
     }
 
+    const items = await Rent.find(filter).skip(skip).limit(take);
 
-    const items = await Rent.find({}).skip(skip).limit(take)
+    res.json(
+        {
+            message: "success",
+            items,
+        }
+    )
 }
 
+const create = async (req: Request, res: Response) => {
+
+}
 
 export default {
     getAll
