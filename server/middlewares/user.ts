@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import passport from "passport";
+import { IUser } from "../types/user";
 
 export const authorize =
     ({ isAdmin = false }) =>
@@ -25,7 +26,7 @@ export const authorize =
         };
 
 export const authenticate = (req: Request, res: Response, next: NextFunction) =>
-    passport.authenticate("local", (err: any, user: any, info: any) => {
+    passport.authenticate("local", (err: Error | null, user: IUser, info: { message: string }) => {
         if (err) {
             res.status(500).json({
                 message: err.message,

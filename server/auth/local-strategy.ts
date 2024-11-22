@@ -45,7 +45,7 @@ export default passport.use(
         done(null, userObj);
       } catch (error) {
         done(null, false, {
-          message: error.message,
+          message: (error as Error).message,
         });
       }
     }

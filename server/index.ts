@@ -7,8 +7,11 @@ import passport from "passport";
 import cors from "cors";
 
 import authRoutes from "./routes/auth";
-import usersRoutes from "./routes/users";
-import "./mongoose/schemas/user";
+import locationRoutes from "./routes/location"
+import categoryRoutes from "./routes/category"
+import rentRoutes from "./routes/rent"
+// import usersRoutes from "./routes/users";
+// import "./mongoose/schemas/user";
 import "./auth/local-strategy";
 
 dotenv.config();
@@ -39,7 +42,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/auth", authRoutes);
-app.use("/users", usersRoutes);
+app.use("/location", locationRoutes)
+app.use("/category", categoryRoutes)
+app.use("/rent", rentRoutes)
+// app.use("/users", usersRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
