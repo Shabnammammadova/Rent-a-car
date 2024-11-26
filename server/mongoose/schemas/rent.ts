@@ -52,7 +52,7 @@ const rentSchema = new Schema({
     },
     currency: {
         type: String,
-        required: true
+        default: "USD"
     },
     discount: {
         type: Number,
@@ -67,10 +67,10 @@ const rentSchema = new Schema({
         default: Date.now
     },
     reviews: {
-        types: [Types.ObjectId],
+        type: [Types.ObjectId],
         ref: "Review",
         default: []
-    },
+    }
 
 });
 

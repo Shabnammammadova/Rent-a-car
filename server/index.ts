@@ -10,9 +10,9 @@ import authRoutes from "./routes/auth";
 import locationRoutes from "./routes/location"
 import categoryRoutes from "./routes/category"
 import rentRoutes from "./routes/rent"
-// import usersRoutes from "./routes/users";
-// import "./mongoose/schemas/user";
+import reservationRoutes from "./routes/reservation"
 import "./auth/local-strategy";
+import path from "path";
 
 dotenv.config();
 
@@ -41,11 +41,16 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+app.use("/public",
+    express.static(path.join(__dirname, "public"))
+)
+
 app.use("/auth", authRoutes);
 app.use("/location", locationRoutes)
 app.use("/category", categoryRoutes)
 app.use("/rent", rentRoutes)
-// app.use("/users", usersRoutes);
+app.use("/reservations", reservationRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

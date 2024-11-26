@@ -22,9 +22,10 @@ const register = async (req: Request, res: Response) => {
     });
 
     if (userExist) {
-        return res.status(400).json({
+        res.status(400).json({
             message: "User already exists with this email",
         });
+        return
     }
 
     const newUser = new User(user);

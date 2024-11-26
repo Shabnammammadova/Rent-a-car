@@ -1,5 +1,5 @@
 import passport from "passport";
-import LocalStrategy from "passport-local";
+import { Strategy as LocalStrategy } from 'passport-local';
 import User from "../mongoose/schemas/user";
 import { comparePasswords } from "../utils/bcrypt";
 import { IUser } from "../types/user";
@@ -19,7 +19,7 @@ passport.deserializeUser(async (id, done) => {
 });
 
 export default passport.use(
-  new LocalStrategy.Strategy(
+  new LocalStrategy(
     {
       usernameField: "email",
     },
