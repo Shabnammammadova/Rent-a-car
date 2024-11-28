@@ -5,7 +5,9 @@ import { IUser } from "../types/user";
 import { transporter } from "../utils/mail";
 import crypto from "crypto"
 
+
 const login = (req: Request, res: Response) => {
+
     res.json({
         message: "Login successful",
         user: req.user

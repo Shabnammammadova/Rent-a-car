@@ -14,7 +14,13 @@ import { Input } from "@/components/ui/input"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-
+import { useMutation } from "@tanstack/react-query"
+import authService from "@/services/auth/auth"
+import { AxiosError } from "axios"
+import { AuthResponseType } from "@/services/auth/types"
+import { toast } from "sonner"
+import { getCurrentUserAsync } from "@/store/features/userSlice"
+import { useAppDispatch } from "@/hooks/redux"
 const formSchema = z.object({
     email: z.string().min(2).max(50),
     password: z.string().min(2).max(50),
@@ -32,6 +38,21 @@ export const LoginDialog = () => {
             password: ""
         },
     })
+    const dispatch = useAppDispatch()
+    const { mutate, isPending } = useMutation({
+        mutationFn: authService.login,
+        onSuccess: (response) => {
+            toast.success(response.data.message);
+            closeDialog()
+            dispatch(getCurrentUserAsync())
+        },
+        onError: (error: AxiosError<AuthResponseType>) => {
+            const message = error.response?.data.message ?? "Something went wrong!Please try again.";
+            toast.error(message)
+
+        }
+    })
+
 
     if (isOpen && type !== ModalEnum.LOGIN) {
         return null
@@ -39,9 +60,8 @@ export const LoginDialog = () => {
 
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
+
+        mutate(values)
     }
 
 
@@ -80,14 +100,18 @@ export const LoginDialog = () => {
                                 <FormItem>
                                     <FormLabel>Password</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="********" {...field} />
+                                        <Input
+                                            type="password"
+                                            placeholder="********" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
 
-                        <Button className="w-full" type="submit">Sign In</Button>
+                        <Button className="w-full"
+                            disabled={isPending}
+                            type="submit">Sign In</Button>
 
                     </form>
                 </Form>

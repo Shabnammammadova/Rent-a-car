@@ -14,10 +14,15 @@ import { Input } from "@/components/ui/input"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useMutation } from "@tanstack/react-query"
+import authService from "@/services/auth/auth"
+import { AxiosError } from "axios"
+import { AuthResponseType } from "@/services/auth/types"
+import { toast } from "sonner"
 
 const formSchema = z.object({
-    firstName: z.string().min(2).max(50),
-    lastName: z.string().min(2).max(50),
+    name: z.string().min(2).max(50),
+    surname: z.string().min(2).max(50),
     email: z.string().min(2).max(50),
     password: z.string().min(2).max(50),
     confirmPassword: z.string().min(2).max(50),
@@ -34,12 +39,25 @@ export const RegisterDialog = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            firstName: "",
-            lastName: "",
+            name: "",
+            surname: "",
             email: "",
             password: "",
             confirmPassword: ""
         },
+    })
+
+    const { mutate, isPending } = useMutation({
+        mutationFn: authService.register,
+        onSuccess: (response) => {
+            toast.success(response.data.message)
+            openDialog(ModalEnum.LOGIN)
+        },
+        onError: (error: AxiosError<AuthResponseType>) => {
+            const message = error.response?.data?.message ?? "Something went wrong!Please try again";
+            toast.error(message)
+
+        }
     })
 
     if (isOpen && type !== ModalEnum.REGISTER) {
@@ -48,9 +66,7 @@ export const RegisterDialog = () => {
 
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
+        mutate(values)
     }
 
 
@@ -71,10 +87,10 @@ export const RegisterDialog = () => {
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                         <FormField
                             control={form.control}
-                            name="firstName"
+                            name="name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Fisrt Name</FormLabel>
+                                    <FormLabel>Name</FormLabel>
                                     <FormControl>
                                         <Input placeholder="John" {...field} />
                                     </FormControl>
@@ -84,10 +100,10 @@ export const RegisterDialog = () => {
                         />
                         <FormField
                             control={form.control}
-                            name="lastName"
+                            name="surname"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Last Name</FormLabel>
+                                    <FormLabel>Surname</FormLabel>
                                     <FormControl>
                                         <Input placeholder="Doe" {...field} />
                                     </FormControl>
@@ -115,7 +131,8 @@ export const RegisterDialog = () => {
                                 <FormItem>
                                     <FormLabel>Password</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="********" {...field} />
+                                        <Input
+                                            type="password" placeholder="********" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -128,14 +145,16 @@ export const RegisterDialog = () => {
                                 <FormItem>
                                     <FormLabel>Confirm Password</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="********" {...field} />
+                                        <Input
+                                            type="password"
+                                            placeholder="********" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
 
-                        <Button className="w-full" type="submit">Register</Button>
+                        <Button className="w-full" type="submit" disabled={isPending}>Register</Button>
 
                     </form>
                 </Form>

@@ -27,7 +27,7 @@ export default passport.use(
       try {
         const user = await User.findOne({
           email,
-        });
+        }).select("-resetPasswordToken -resetPasswordExpires");
         if (!user || !comparePasswords(password, user.password)) {
           return done(null, false, {
             message: "Invalid email or password",

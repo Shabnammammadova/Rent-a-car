@@ -6,7 +6,7 @@ import {
     resetPasswordSchema,
 } from "../validation/auth";
 
-import { authenticate } from "../middlewares/user";
+import { authenticate, authorize } from "../middlewares/user";
 
 import validateSchema from "../middlewares/validation";
 import authController from "../controllers/auth";
@@ -19,7 +19,7 @@ router.post("/register", validateSchema(registerSchema), authController.register
 
 router.post("/logout", authController.logout);
 
-router.get("/current-user", authController.currentUser);
+router.get("/current-user", authorize({}), authController.currentUser);
 
 router.post(
     "/forgot-password",
