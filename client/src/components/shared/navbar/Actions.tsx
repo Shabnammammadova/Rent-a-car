@@ -49,12 +49,18 @@ export const Actions = () => {
             </Link>
             {user ?
                 <DropdownMenu>
-                    <DropdownMenuTrigger asChild> <button className="rounded-full border border-[#c3d4e966] opacity-80 hover:opacity-100 duration-75 p-2.5"><User2Icon color="#596780" /></button> </DropdownMenuTrigger>
+                    <DropdownMenuTrigger asChild>
+                        <button className="rounded-full border border-[#c3d4e966] opacity-80 hover:opacity-100 duration-75 p-2.5">
+                            <User2Icon color="#596780" />
+                        </button>
+                    </DropdownMenuTrigger>
                     <DropdownMenuContent>
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         {
-                            user.role === UserRole.Admin && <DropdownMenuItem> <Link to={paths.DASHBOARD.MAIN}>Dashboard</Link>        </DropdownMenuItem>
+                            user.role === UserRole.Admin && <DropdownMenuItem>
+                                <Link to={paths.DASHBOARD.MAIN}>Dashboard</Link>
+                            </DropdownMenuItem>
                         }
                         <DropdownMenuItem><Link to="/reservation">Reservation</Link></DropdownMenuItem>
                         <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}> <LogOut />

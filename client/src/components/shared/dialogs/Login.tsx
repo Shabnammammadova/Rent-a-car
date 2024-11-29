@@ -68,54 +68,57 @@ export const LoginDialog = () => {
 
     return (
         <Dialog open={isOpen} onOpenChange={closeDialog}>
-            <DialogContent className="bg-white">
-                <DialogHeader>
-                    <DialogTitle className="text-xl lg:text-3xl">Sign In</DialogTitle>
-                    <DialogDescription>
+            <>
+                <DialogContent className="bg-white">
+                    <DialogHeader>
+                        <DialogTitle className="text-xl lg:text-3xl">Sign In</DialogTitle>
+                        <DialogDescription>
 
-                        Don't have an account?{""}
-                        <button onClick={() => openDialog(ModalEnum.REGISTER)} className="text-primary">Create an account</button>
+                            Don't have an account?{""}
+                            <button onClick={() => openDialog(ModalEnum.REGISTER)} className="text-primary">Create an account</button>
 
-                    </DialogDescription>
-                </DialogHeader>
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Email</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="name@example.com" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="password"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Password</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            type="password"
-                                            placeholder="********" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+                        </DialogDescription>
+                    </DialogHeader>
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Email</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="name@example.com" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="password"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Password</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="password"
+                                                placeholder="********" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
 
-                        <Button className="w-full"
-                            disabled={isPending}
-                            type="submit">Sign In</Button>
+                            <Button className="w-full"
+                                disabled={isPending}
+                                type="submit">Sign In</Button>
 
-                    </form>
-                </Form>
-            </DialogContent>
+                        </form>
+                    </Form>
+                </DialogContent>
+            </>
+
         </Dialog>
     )
 }
