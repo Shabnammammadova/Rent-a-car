@@ -1,4 +1,5 @@
 import DashboardLayout from "@/components/shared/DashboardLayout";
+import ForgotPassword from "@/components/shared/dialogs/ForgotPassword";
 import RootLayout from "@/components/shared/RootLayout";
 import { paths } from "@/constants/paths";
 import DashboardMainPage from "@/pages/(dashboard)/main";
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
             {
                 path: paths.PAYMENT,
                 element: <PaymentPage />
+            },
+            {
+                path: "/forgot-password",
+                element: <ForgotPassword />
             },
             {
                 path: "",

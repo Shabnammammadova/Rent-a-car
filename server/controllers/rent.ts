@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { matchedData } from "express-validator";
 import Rent from "../mongoose/schemas/rent";
+import Category from "../mongoose/schemas/category";
 
 const getAll = async (req: Request, res: Response) => {
     try {
@@ -72,7 +72,7 @@ const create = async (req: Request, res: Response) => {
         const {
             name,
             description,
-            category,
+            categoryId,
             pickUpLocation,
             dropOffLocations,
             fuel,
@@ -83,7 +83,14 @@ const create = async (req: Request, res: Response) => {
             discount
         } = req.matchedData;
 
+        const category = await Category.findById(categoryId);
 
+        if (!category) {
+            res.status(404).json({
+                message: "Category Not Found"
+            });
+            return
+        }
 
         const images = (req.files as any)?.map((file: any) => file.filename)
 
@@ -102,7 +109,22 @@ const create = async (req: Request, res: Response) => {
             images
         })
 
-        await rent.save()
+        await rent.save();
+
+
+        category.rents.push(rent._id)
+        await category.save()
+
+        if (Array.isArray(category.rents)) {
+            category.rents.push(rent._id);
+            await category.save();
+        } else {
+            res.status(500).json({
+                message: "Category rents is not an array",
+            });
+            return;
+        }
+
         res.status(201).json({
             message: "success",
             item: rent
@@ -120,19 +142,43 @@ const edit = async (req: Request,
 ) => {
     try {
         const { id } = req.params;
-        const data = { ...req.matchedData }
+        const data = { ...req.matchedData };
+
+        const { categoryId } = data
+        const category = await Category.findById(categoryId)
+
+        if (!category) {
+            res.status(404).json({
+                message: "Category Not Found"
+            });
+            return
+        }
+
         if (req.files && (req.files as any).length > 0) {
             data.images = (req.files as any).map((file: any) => file.filename)
         }
-        const rent = await Rent.findByIdAndUpdate(id, data, {
-            new: true
-        })
+
+
+        const rent = await Rent.findById(id)
         if (!rent) {
             res.status(404).json({
                 message: "Not Found"
             })
             return
         }
+        const oldCategoryId = rent.category
+
+        await Category.findByIdAndUpdate(oldCategoryId, {
+            $pull: {
+                rents: id
+            },
+        });
+        category.rents.push(rent._id)
+        await category.save()
+
+
+        rent.updateOne(data)
+        await rent.save()
         res.json({
             message: "success",
             item: rent

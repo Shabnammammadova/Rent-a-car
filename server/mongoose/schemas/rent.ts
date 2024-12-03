@@ -29,11 +29,11 @@ const rentSchema = new Schema({
         ref: "Location",
         required: true
     },
-    location: {
-        type: Types.ObjectId,
-        ref: "Location",
-        required: true
-    },
+    // location: {
+    //     type: Types.ObjectId,
+    //     ref: "Location",
+    //     required: true
+    // },
     fuel: {
         type: String,
         required: true

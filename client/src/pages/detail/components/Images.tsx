@@ -13,11 +13,3 @@ export const ImagesSection = () => {
         </div>
     )
 }
-/*
-        <div className="grid grid-cols-3 grid-rows-[1fr_24px] gap-6 ">
-            <img src={Image1} alt="main" className="col-span-3 w-full h-full object-cover" />
-            <img src={Image2} alt="other" />
-            <img src={Image3} alt="other" />
-            <img src={Image4} alt="other" />
-        </div>
-*/

@@ -12,4 +12,9 @@ router.patch("/:id/cancel", authorize({}), reservationController.cancel)
 router.patch("/:id/change-status", authorize({ isAdmin: true }),
     validateSchema(changeStatusSchema),
     reservationController.changeStatus)
+
+
+
+console.log(new Date());
+
 export default router

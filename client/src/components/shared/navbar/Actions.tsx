@@ -62,6 +62,7 @@ export const Actions = () => {
                                 <Link to={paths.DASHBOARD.MAIN}>Dashboard</Link>
                             </DropdownMenuItem>
                         }
+                        <DropdownMenuItem><Link to="/profile">Profile</Link></DropdownMenuItem>
                         <DropdownMenuItem><Link to="/reservation">Reservation</Link></DropdownMenuItem>
                         <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}> <LogOut />
                             <span>Log out</span>

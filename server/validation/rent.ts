@@ -4,8 +4,8 @@ export const getAllRentSchema: Schema = {
     type: {
         in: ["query"],
         matches: {
-            options: [/^(recommended | popular)$/],
-            errorMessage: "type must be either recommend or popular"
+            options: [/^(recommended|popular)$/],
+            errorMessage: "type must be either 'recommended' or 'popular'"
         },
         optional: true
     },
@@ -24,7 +24,7 @@ export const getAllRentSchema: Schema = {
         isString: true,
         optional: true
     },
-    category: {
+    categoryId: {
         in: ["query"],
         isString: true,
         optional: true
@@ -98,7 +98,7 @@ export const createRentSchema: Schema = {
         isNumeric: true,
         notEmpty: true
     },
-    category: {
+    categoryId: {
         in: ["body"],
         isString: true,
         notEmpty: true
@@ -167,7 +167,7 @@ export const editRentSchema: Schema = {
         isNumeric: true,
         notEmpty: true
     },
-    category: {
+    categoryId: {
         in: ["body"],
         isString: true,
         notEmpty: true

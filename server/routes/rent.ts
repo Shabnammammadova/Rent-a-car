@@ -11,7 +11,7 @@ router.post("/", authorize({ isAdmin: true }),
     validateSchema(createRentSchema),
     rentController.create
 )
-router.put("/Iid", authorize({ isAdmin: true }),
+router.put("/:id", authorize({ isAdmin: true }),
     upload.array("images", 8),
     validateSchema(editRentSchema),
     rentController.edit

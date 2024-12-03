@@ -9,7 +9,14 @@ const categorySchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    rents: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Rent",
+
+        }
+    ]
 });
 
 categorySchema.set("toJSON", {
