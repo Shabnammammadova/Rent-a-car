@@ -3,7 +3,8 @@ import ForgotPassword from "@/components/shared/dialogs/ForgotPassword";
 import RootLayout from "@/components/shared/RootLayout";
 import { paths } from "@/constants/paths";
 import DashboardMainPage from "@/pages/(dashboard)/main";
-import DashboardRentsPage from "@/pages/(dashboard)/rents";
+import DashboardRentsPage from "@/pages/(dashboard)/rents/list";
+import DashboardCreatePage from "@/pages/(dashboard)/rents/create";
 import RentDetailPage from "@/pages/detail";
 import HomePage from "@/pages/home";
 import { RentListPage } from "@/pages/list";
@@ -44,8 +45,12 @@ export const router = createBrowserRouter([
                         element: <DashboardMainPage />
                     },
                     {
-                        path: paths.DASHBOARD.RENT,
+                        path: paths.DASHBOARD.RENT.LIST,
                         element: <DashboardRentsPage />
+                    },
+                    {
+                        path: paths.DASHBOARD.RENT.CREATE,
+                        element: <DashboardCreatePage />
                     }
                 ]
             }

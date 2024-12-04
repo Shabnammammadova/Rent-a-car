@@ -5,6 +5,10 @@ export const paths = {
     PAYMENT: "/payment",
     DASHBOARD: {
         MAIN: "/dashboard",
-        RENT: "/dashboard/rents"
+        RENT: {
+            LIST: "/dashboard/rents",
+            CREATE: "/dashboard/rents/create",
+            DETAIL: (id = ":id") => `/dashboard/rents/${id}`
+        }
     }
 }

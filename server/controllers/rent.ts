@@ -53,6 +53,12 @@ const getAll = async (req: Request, res: Response) => {
 
         const items = await Rent.find(filter).skip(skip).limit(take).populate(["category", "pickUpLocation", "dropOffLocation"]);
 
+        items.forEach((item) => {
+            item.images = item.images.map((image) => `${process.env.BASE_URL}/public/rent${image}`)
+        })
+
+
+
         res.json(
             {
                 message: "success",

@@ -21,7 +21,7 @@ const items = [
     },
     {
         title: "Car Rent",
-        url: paths.DASHBOARD.RENT,
+        url: paths.DASHBOARD.RENT.LIST,
         icon: CarIcon,
     },
 

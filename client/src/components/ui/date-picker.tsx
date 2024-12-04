@@ -17,11 +17,14 @@ import {
 type Props = {
     onChange: (date?: Date) => void;
     hidePastDates?: boolean;
-    defaultDate?: string | null;
+    defaultDate: string | null;
 }
 
 export function DatePicker({ onChange, hidePastDates = false, defaultDate }: Props) {
     const [date, setDate] = useState<Date | undefined>(defaultDate ? new Date(defaultDate) : undefined)
+
+
+
 
     return (
         <Popover>
