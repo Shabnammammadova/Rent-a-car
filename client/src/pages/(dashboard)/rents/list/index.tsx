@@ -55,7 +55,7 @@ const DashboardRentsPage = () => {
                 <h2 className="text-primary font-bold text-2xl ">
                     Rents
                 </h2>
-                <Button asChild variant={"secondary"}>
+                <Button asChild>
                     <Link to={paths.DASHBOARD.RENT.CREATE}>Create Rent</Link>
                 </Button>
             </div>

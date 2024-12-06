@@ -5,6 +5,7 @@ import { paths } from "@/constants/paths";
 import DashboardMainPage from "@/pages/(dashboard)/main";
 import DashboardRentsPage from "@/pages/(dashboard)/rents/list";
 import DashboardCreatePage from "@/pages/(dashboard)/rents/create";
+import DashboardEditPage from "@/pages/(dashboard)/rents/update";
 import RentDetailPage from "@/pages/detail";
 import HomePage from "@/pages/home";
 import { RentListPage } from "@/pages/list";
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
                     {
                         path: paths.DASHBOARD.RENT.CREATE,
                         element: <DashboardCreatePage />
+                    },
+                    {
+                        path: paths.DASHBOARD.RENT.EDIT(),
+                        element: <DashboardEditPage />
                     }
                 ]
             }

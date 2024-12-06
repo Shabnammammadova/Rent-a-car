@@ -8,7 +8,7 @@ export const paths = {
         RENT: {
             LIST: "/dashboard/rents",
             CREATE: "/dashboard/rents/create",
-            DETAIL: (id = ":id") => `/dashboard/rents/${id}`
+            EDIT: (id = ":id") => `/dashboard/rents/edit/${id}`
         }
     }
 }

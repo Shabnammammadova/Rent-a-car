@@ -54,7 +54,7 @@ const getAll = async (req: Request, res: Response) => {
         const items = await Rent.find(filter).skip(skip).limit(take).populate(["category", "pickUpLocation", "dropOffLocation"]);
 
         items.forEach((item) => {
-            item.images = item.images.map((image) => `${process.env.BASE_URL}/public/rent${image}`)
+            item.images = item.images.map((image) => `${process.env.BASE_URL}/public/rent/${image}`)
         })
 
 
@@ -69,6 +69,39 @@ const getAll = async (req: Request, res: Response) => {
         console.log(err);
         res.status(500).send({
             message: "Internal server Error"
+        })
+    }
+}
+
+
+const getById = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const rent = await Rent.findById(id).populate([
+            "category",
+            "pickUpLocation",
+            "dropOffLocations"
+        ]);
+
+        if (!rent) {
+            res.status(404).json({
+                message: "Not Found"
+            });
+            return
+        }
+
+        rent.images = rent.images.map((image) => `${process.env.BASE_URL}/public/rent/${image}`);
+
+        res.json({
+            message: "success",
+            item: rent
+        });
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({
+            message: "Internal Server Error"
         })
     }
 }
@@ -183,7 +216,20 @@ const edit = async (req: Request,
         await category.save()
 
 
-        rent.updateOne(data)
+        rent.name = data.name;
+        rent.description = data.description;
+        rent.category = data.categoryId;
+        rent.pickUpLocation = data.data.pickUpLocation;
+        rent.dropOffLocation = data.dropOffLocations;
+        rent.fuel = data.fuel;
+        rent.gearBox = data.gearBox;
+        rent.capacity = data.capacity;
+        rent.price = data.price;
+        rent.discount = data.discount;
+        if (data.images) rent.images = data.images;
+
+
+
         await rent.save()
         res.json({
             message: "success",
@@ -222,6 +268,7 @@ const remove = async (req: Request, res: Response) => {
 }
 export default {
     getAll,
+    getById,
     create,
     edit,
     remove

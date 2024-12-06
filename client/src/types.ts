@@ -1,4 +1,4 @@
-import { StringValidation } from "zod";
+
 
 export type User = {
     _id: string;
@@ -17,7 +17,7 @@ export type Location = {
 export type Rent = {
     _id: string,
     capacity: number,
-    fuel: string;
+    fuel: number;
     gearBox: string;
     price: number;
     name: string;
@@ -29,7 +29,6 @@ export type Rent = {
     dropOffLocations: Location[];
     images: string[];
     pickUpLocation: Location;
-
     showInRecommendation: boolean
 }
 export type Category = {

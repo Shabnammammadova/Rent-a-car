@@ -1,6 +1,8 @@
+import { paths } from "@/constants/paths"
 import { Rent } from "@/types"
 import { ColumnDef } from "@tanstack/react-table"
-import { CheckIcon, XIcon } from "lucide-react"
+import { CheckIcon, Edit2Icon, XIcon } from "lucide-react"
+import { Link } from "react-router-dom"
 
 
 
@@ -12,7 +14,7 @@ export const columns: ColumnDef<Rent>[] = [
         cell: (data) => {
             return (<img src={data.row.original.images[0]}
                 alt={"Rent images"}
-                className="w-10 h-10 object-cover rounded-lg" />)
+                className="w-10 h-10 object-contain rounded-lg" />)
 
 
         }
@@ -63,6 +65,17 @@ export const columns: ColumnDef<Rent>[] = [
         cell: (data) => {
             <div>
                 {data.row.original.showInRecommendation ? (<CheckIcon className="text-green-500" />) : (<XIcon className="text-red-500" />)}
+            </div>
+        }
+    },
+    {
+        accessorKey: "",
+        header: "Actions",
+        cell: (data) => {
+            <div>
+                <Link to={paths.DASHBOARD.RENT.EDIT(data.row.original._id)}>
+                    <Edit2Icon className="w-4 h-4" />
+                </Link>
             </div>
         }
     },
