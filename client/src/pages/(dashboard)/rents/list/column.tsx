@@ -63,20 +63,24 @@ export const columns: ColumnDef<Rent>[] = [
         accessorKey: "showInRecommendation",
         header: "Show in Recommendation",
         cell: (data) => {
-            <div>
-                {data.row.original.showInRecommendation ? (<CheckIcon className="text-green-500" />) : (<XIcon className="text-red-500" />)}
-            </div>
+            return (
+                <div className="cursor-pointer">
+                    {data.row.original.showInRecommendation ? (<CheckIcon className="text-green-500" />) : (<XIcon className="text-red-500" />)}
+                </div>
+            )
         }
     },
     {
         accessorKey: "",
         header: "Actions",
         cell: (data) => {
-            <div>
-                <Link to={paths.DASHBOARD.RENT.EDIT(data.row.original._id)}>
-                    <Edit2Icon className="w-4 h-4" />
-                </Link>
-            </div>
+            return (
+                <div>
+                    <Link to={paths.DASHBOARD.RENT.EDIT(data.row.original._id)}>
+                        <Edit2Icon className="w-4 h-4" />
+                    </Link>
+                </div>
+            )
         }
     },
 

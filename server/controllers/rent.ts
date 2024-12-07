@@ -12,7 +12,7 @@ const getAll = async (req: Request, res: Response) => {
 
 
 
-        if (type === "recommendation") {
+        if (type === "recommended") {
             filter.showInRecommendation = true
         }
 
@@ -119,7 +119,8 @@ const create = async (req: Request, res: Response) => {
             capacity,
             price,
             currency,
-            discount
+            discount,
+            showInRecommendation = false,
         } = req.matchedData;
 
         const category = await Category.findById(categoryId);
@@ -227,7 +228,7 @@ const edit = async (req: Request,
         rent.price = data.price;
         rent.discount = data.discount;
         if (data.images) rent.images = data.images;
-
+        if (data.showInRecommendation !== undefined) rent.showInRecommendation = data.showInRecommendation
 
 
         await rent.save()
