@@ -7,7 +7,7 @@ const getAll = async (req: Request, res: Response) => {
         const { type, take = 10, skip = 0, search, category, capacity, min_price, max_price, pickup_location, dropoff_location } = req.matchedData;
 
         const filter: Record<string, any> = {
-            AND: []
+            $and: []
         }
 
 
@@ -32,10 +32,10 @@ const getAll = async (req: Request, res: Response) => {
         }
 
         if (min_price) {
-            filter.AND.push({ price: { $gte: min_price } })
+            filter.$and.push({ price: { $gte: min_price } })
         }
         if (max_price) {
-            filter.AND.push({ price: { $lte: max_price } })
+            filter.$and.push({ price: { $lte: max_price } })
         }
         if (pickup_location) {
             filter.pickUpLocation = pickup_location
@@ -47,11 +47,13 @@ const getAll = async (req: Request, res: Response) => {
                 }
             }
         }
-        if (filter.AND.length === 0) {
-            delete filter.AND
+        if (filter.$and.length === 0) {
+            delete filter.$and
         }
 
-        const items = await Rent.find(filter).skip(skip).limit(take).populate(["category", "pickUpLocation", "dropOffLocation"]);
+        const items = await Rent.find(filter).skip(+skip).limit(+take).populate(["category", "pickUpLocation", "dropOffLocation"]);
+
+        const total = await Rent.countDocuments(filter)
 
         items.forEach((item) => {
             item.images = item.images.map((image) => `${process.env.BASE_URL}/public/rent/${image}`)
@@ -63,6 +65,9 @@ const getAll = async (req: Request, res: Response) => {
             {
                 message: "success",
                 items,
+                total,
+                take: +take,
+                skip: +skip
             }
         )
     } catch (err) {
@@ -146,7 +151,8 @@ const create = async (req: Request, res: Response) => {
             price,
             currency,
             discount,
-            images
+            images,
+            showInRecommendation
         })
 
         await rent.save();
@@ -220,7 +226,7 @@ const edit = async (req: Request,
         rent.name = data.name;
         rent.description = data.description;
         rent.category = data.categoryId;
-        rent.pickUpLocation = data.data.pickUpLocation;
+        rent.pickUpLocation = data.pickUpLocation;
         rent.dropOffLocation = data.dropOffLocations;
         rent.fuel = data.fuel;
         rent.gearBox = data.gearBox;

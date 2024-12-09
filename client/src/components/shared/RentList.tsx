@@ -1,9 +1,9 @@
-
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
-import RentCard from "./rent-card";
+
 import { Rent } from "@/types";
 import { RenderIf } from "./RenderIf";
+import { RentCard } from "./rent-card";
 
 
 
@@ -11,7 +11,7 @@ type Props = {
     heading: string;
     maxCols: number;
     isLoading: boolean;
-    rents?: Rent[]
+    rents: Rent[]
 }
 
 const List = ({ heading, maxCols = 4, isLoading = false, rents }: Props) => {
@@ -30,9 +30,13 @@ const List = ({ heading, maxCols = 4, isLoading = false, rents }: Props) => {
                     }
                 </RenderIf>
                 <RenderIf condition={!isLoading}>
+
                     {rents?.map((rent) => (
                         <RentCard key={rent._id} rent={rent} />
+
+
                     ))}
+
                 </RenderIf>
 
 

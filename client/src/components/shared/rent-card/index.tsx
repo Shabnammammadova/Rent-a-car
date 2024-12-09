@@ -18,11 +18,17 @@ type Props = {
     rent: Rent;
 }
 
-const RentCard = ({ rent }: Props) => {
+export const RentCard = ({ rent }: Props) => {
+
     const [isliked, setisLiked] = useState(false)
     const navigate = useNavigate()
-    const id = "asdc-12d1w-12d1w"
+
+    const id = "asdc-12d1w-121w-12d1w-12d1w"
+    console.log("rent", rent);
+
     const { name, category, fuel, gearBox, images, capacity, price } = rent
+    console.log(rent);
+
     const mainImage = images[0]
     function navigateDetail() {
         navigate(paths.DETAIL(id))
@@ -61,7 +67,7 @@ const RentCard = ({ rent }: Props) => {
         </div>
     )
 }
-export default RentCard
+
 
 
 

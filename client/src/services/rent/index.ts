@@ -32,7 +32,7 @@ const getAll = async (queryData: GetAllRequestQueryData) => {
     return await axiosInstance.get<GetAllRentResponseType>(`/rent?${searchParams.toString()}`)
 }
 const getById = async (id: string) => {
-    return await axiosInstance.get<GetByIdRentResponseType>("/rent/${id}")
+    return await axiosInstance.get<GetByIdRentResponseType>(`/rent/${id}`)
 }
 const create = async (data: CreateRentRequestPayload) => {
     const formData = new FormData();
