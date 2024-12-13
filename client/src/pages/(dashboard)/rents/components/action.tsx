@@ -37,8 +37,7 @@ const getformSchema = (isEdit: boolean) => z.object({
         .number({
             invalid_type_error: 'Discount must be a number',
             required_error: 'Discount  is required',
-        })
-        .positive(),
+        }),
     categoryId: z.string().min(2, { message: 'Category is required' }),
     fuel: z
         .number({

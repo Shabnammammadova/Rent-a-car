@@ -102,3 +102,15 @@
 html {
   scroll-behavior: smooth;
 }
+
+.swipper-button-next::after,
+.swiper-button-prev::after {
+  color: var(--primary);
+  font-size: 32px !important;
+}
+.swipper-button-next {
+  right: 0px !important;
+}
+.swiper-button-prev {
+  left: 0px !important;
+}

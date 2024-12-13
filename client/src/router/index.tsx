@@ -11,6 +11,9 @@ import HomePage from "@/pages/home";
 import { RentListPage } from "@/pages/list";
 import PaymentPage from "@/pages/payment";
 import { createBrowserRouter } from "react-router-dom";
+import AuthLayout from "@/components/shared/AuthLayout";
+import ReservationPage from "@/pages/reservations";
+import DashboardReservationPage from "@/pages/(dashboard)/reservations/list";
 
 export const router = createBrowserRouter([
     {
@@ -30,8 +33,18 @@ export const router = createBrowserRouter([
                 element: <RentDetailPage />
             },
             {
-                path: paths.PAYMENT,
-                element: <PaymentPage />
+                path: "",
+                element: <AuthLayout />,
+                children: [
+                    {
+                        path: paths.PAYMENT(),
+                        element: <PaymentPage />
+                    },
+                    {
+                        path: paths.RESERVATIONS,
+                        element: <ReservationPage />
+                    }
+                ],
             },
             {
                 path: "/forgot-password",
@@ -56,6 +69,10 @@ export const router = createBrowserRouter([
                     {
                         path: paths.DASHBOARD.RENT.EDIT(),
                         element: <DashboardEditPage />
+                    },
+                    {
+                        path: paths.DASHBOARD.RESERVATIONS.LIST,
+                        element: <DashboardReservationPage />
                     }
                 ]
             }

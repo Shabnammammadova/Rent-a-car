@@ -6,11 +6,16 @@ import People from "@/assets/icons/people.svg"
 
 
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { paths } from "@/constants/paths"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Rent } from "@/types"
+import { formatPrice } from "@/lib/utils"
+import { useSelector } from "react-redux"
+import { selectUserData } from "@/store/features/userSlice"
+import { toast } from "sonner"
+import { ModalEnum, useDialog } from "@/hooks/useDialog"
 
 
 
@@ -19,14 +24,15 @@ type Props = {
 }
 
 export const RentCard = ({ rent }: Props) => {
-
+    const { user } = useSelector(selectUserData)
+    const { openDialog } = useDialog()
     const [isliked, setisLiked] = useState(false)
     const navigate = useNavigate()
 
-    const id = "asdc-12d1w-121w-12d1w-12d1w"
-    console.log("rent", rent);
+    // const id = "asdc-12d1w-121w-12d1w-12d1w"
+    // console.log("rent", rent);
 
-    const { name, category, fuel, gearBox, images, capacity, price } = rent
+    const { _id, name, category, fuel, gearBox, images, capacity, price } = rent
     console.log(rent);
 
     const mainImage = images[0]
@@ -37,15 +43,16 @@ export const RentCard = ({ rent }: Props) => {
         <div className="w-full bg-white rounded-[10px] p-4 lg:p-6">
             <div className="flex justify-between">
                 <div >
-                    <h4 onClick={navigateDetail} className="font-bold text-secondary-500 text-base lg:text-sm  tracking-[-0.6px] hover:underline cursor-pointer">{name}</h4>
+                    <Link to={paths.DETAIL(_id)} className="font-bold text-secondary-500 text-base lg:text-sm  tracking-[-0.6px] hover:underline cursor-pointer">{name}</Link>
                     <p className="text-secondary-300 text-xs lg:text-sm tracking-[-0.28px]">{category.name}</p>
                 </div>
                 <button className="h-fit" onClick={() => setisLiked(!isliked)}><img src={isliked ? HeartFilldeRed : HeartOutlined} alt="heart" /></button>
             </div>
-            <div onClick={navigateDetail} className="mt-8 lg:mt-12 relative cursor-pointer">
+            <Link to={paths.DETAIL(_id)}
+                onClick={navigateDetail} className="mt-8 lg:mt-12 relative cursor-pointer">
                 <img src={mainImage} alt="rent-car" className="w-full h-32 object-contain" />
                 <div className="bg-[linear-gradient(180deg,rgba(255, 255, 255, 0.00) 0%,#FFF_100%)] w-full h-[68px] absolute bottom-0" />
-            </div>
+            </Link>
             <div className="flex items-center justify-between mt-5 lg:mt-9">
                 <div className="flex items-center gap-1.5">
                     <img src={Fuel} alt="fuel" />
@@ -61,8 +68,18 @@ export const RentCard = ({ rent }: Props) => {
                 </div>
             </div>
             <div className="flex items-center justify-between mt-3 lg:mt-6">
-                <p className="text-secondary-500 text-xl font-bold">${price}/ <span className="text-sm text-secondary-300"></span>day</p>
-                <Button>Rent Now</Button>
+                <p className="text-secondary-500 text-xl font-bold">{formatPrice(price)}/ <span className="text-sm text-secondary-300"></span>day</p>
+                <Button asChild>
+                    <Link to={paths.PAYMENT(_id)} onClick={
+                        () => {
+                            if (!user) {
+                                toast.warning("Please login to rent a car")
+                                openDialog(ModalEnum.LOGIN)
+                            }
+                        }}>
+                        Rent Now
+                    </Link>
+                </Button>
             </div>
         </div>
     )

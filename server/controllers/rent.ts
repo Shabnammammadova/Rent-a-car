@@ -7,7 +7,8 @@ const getAll = async (req: Request, res: Response) => {
         const { type, take = 10, skip = 0, search, category, capacity, min_price, max_price, pickup_location, dropoff_location } = req.matchedData;
 
         const filter: Record<string, any> = {
-            $and: []
+            $and: [],
+            $or: []
         }
 
 
@@ -17,10 +18,10 @@ const getAll = async (req: Request, res: Response) => {
         }
 
         if (search) {
-            filter.OR = [
+            filter.$or.push(
                 { name: { $regex: new RegExp(search, "i") } },
                 { description: { $regex: new RegExp(search, "i") } }
-            ]
+            )
         }
         if (capacity) {
             const capacityList = typeof capacity === "string" ? { capacity } : capacity;
@@ -41,10 +42,8 @@ const getAll = async (req: Request, res: Response) => {
             filter.pickUpLocation = pickup_location
         }
         if (dropoff_location) {
-            filter.dropOffLocation = {
-                $elemMatch: {
-                    location: dropoff_location
-                }
+            filter.dropOffLocations = {
+                $in: [dropoff_location]
             }
         }
         if (filter.$and.length === 0) {
@@ -86,7 +85,7 @@ const getById = async (req: Request, res: Response) => {
         const rent = await Rent.findById(id).populate([
             "category",
             "pickUpLocation",
-            "dropOffLocations"
+            "dropOffLocation"
         ]);
 
         if (!rent) {

@@ -50,7 +50,7 @@ app.use("/auth", authRoutes);
 app.use("/location", locationRoutes)
 app.use("/category", categoryRoutes)
 app.use("/rent", rentRoutes)
-app.use("/reservations", reservationRoutes)
+app.use("/reservation", reservationRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

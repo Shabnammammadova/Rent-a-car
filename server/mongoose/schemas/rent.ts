@@ -74,6 +74,7 @@ const rentSchema = new Schema({
 
 });
 
+
 rentSchema.set("toJSON", {
     virtuals: true,
     transform: (doc, ret) => {

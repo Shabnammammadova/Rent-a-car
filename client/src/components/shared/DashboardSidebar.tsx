@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sidebar"
 import { paths } from "@/constants/paths"
 
-import { CarIcon, Home } from "lucide-react"
+import { Calendar1Icon, CarIcon, Home } from "lucide-react"
 
 
 const items = [
@@ -23,6 +23,11 @@ const items = [
         title: "Car Rent",
         url: paths.DASHBOARD.RENT.LIST,
         icon: CarIcon,
+    },
+    {
+        title: "Reservations",
+        url: paths.DASHBOARD.RESERVATIONS.LIST,
+        icon: Calendar1Icon,
     },
 
 ]

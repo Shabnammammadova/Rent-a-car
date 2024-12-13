@@ -43,11 +43,11 @@ export const Availability = () => {
 
     const handleSwap = () => {
         setRotate(!rotate);
-        const pickupLocation = searchParams.get("pickup-location");
-        const dropoffLocation = searchParams.get("dropoff-location");
+        const pickupLocation = searchParams.get("pickup_location");
+        const dropoffLocation = searchParams.get("dropoff_location");
 
-        if (dropoffLocation) searchParams.set("pickup-location", dropoffLocation || ""); else searchParams.delete("pickup-location")
-        if (pickupLocation) searchParams.set("dropoff-location", pickupLocation || ""); else searchParams.delete("dropoff-location")
+        if (dropoffLocation) searchParams.set("pickup_location", dropoffLocation || ""); else searchParams.delete("pickup_location")
+        if (pickupLocation) searchParams.set("dropoff_location", pickupLocation || ""); else searchParams.delete("dropoff_location")
 
         setSearchParams(searchParams)
     }
@@ -100,12 +100,12 @@ const Card = ({ locationOptions, heading, type }: {
     const location = useLocation();
     const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams();
-    const selectedLocation = searchParams.get(`${type}-location`);
-    const selectedDate = searchParams.get(`${type} -date`)
+    const selectedLocation = searchParams.get(`${type}_location`);
+    const selectedDate = searchParams.get(`${type}_date`)
 
     function handleChange(field: string, value: string) {
 
-        searchParams.set(`${type}-${field}`, value);
+        searchParams.set(`${type}_${field}`, value);
         setSearchParams(searchParams);
         if (location.pathname === "/") {
             navigate(paths.LIST + "?" + searchParams.toString())

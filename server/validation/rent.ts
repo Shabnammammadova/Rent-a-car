@@ -24,9 +24,8 @@ export const getAllRentSchema: Schema = {
         isString: true,
         optional: true
     },
-    categoryId: {
+    category: {
         in: ["query"],
-        isString: true,
         optional: true
     },
     capacity: {
