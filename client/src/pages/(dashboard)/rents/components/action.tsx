@@ -94,7 +94,7 @@ const ActionForm = ({ type }: Props) => {
     const editItem = data?.data.item ?? null
 
 
-    console.log("update", data, isLoading);
+    console.log("create", data, isLoading);
 
     const navigate = useNavigate()
     const { mutateAsync } = useMutation({

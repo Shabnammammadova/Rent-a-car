@@ -107,7 +107,7 @@ export const createRentSchema: Schema = {
         isString: true,
         notEmpty: true
     },
-    dropOffLocations: {
+    dropOffLocation: {
         in: ["body"],
         isArray: true,
         notEmpty: true

@@ -23,8 +23,11 @@ const getAll = async (req: Request, res: Response) => {
                 { description: { $regex: new RegExp(search, "i") } }
             )
         }
+        // console.log(typeof capacity);
+
         if (capacity) {
-            const capacityList = typeof capacity === "string" ? { capacity } : capacity;
+
+            const capacityList = typeof capacity === "string" ? [capacity] : capacity;
             filter.capacity = { $in: capacityList }
         }
         if (category) {
@@ -40,15 +43,22 @@ const getAll = async (req: Request, res: Response) => {
         }
         if (pickup_location) {
             filter.pickUpLocation = pickup_location
+            console.log(pickup_location);
+
         }
         if (dropoff_location) {
-            filter.dropOffLocations = {
+            filter.dropOffLocation = {
                 $in: [dropoff_location]
             }
+            console.log(dropoff_location);
+
         }
         if (filter.$and.length === 0) {
             delete filter.$and
         }
+
+        console.log(filter);
+
 
         const items = await Rent.find(filter).skip(+skip).limit(+take).populate(["category", "pickUpLocation", "dropOffLocation"]);
 
@@ -117,7 +127,7 @@ const create = async (req: Request, res: Response) => {
             description,
             categoryId,
             pickUpLocation,
-            dropOffLocations,
+            dropOffLocation,
             fuel,
             gearBox,
             capacity,
@@ -143,7 +153,7 @@ const create = async (req: Request, res: Response) => {
             description,
             category,
             pickUpLocation,
-            dropOffLocations,
+            dropOffLocation,
             fuel,
             gearBox,
             capacity,
@@ -226,7 +236,7 @@ const edit = async (req: Request,
         rent.description = data.description;
         rent.category = data.categoryId;
         rent.pickUpLocation = data.pickUpLocation;
-        rent.dropOffLocation = data.dropOffLocations;
+        rent.dropOffLocation = data.dropOffLocation;
         rent.fuel = data.fuel;
         rent.gearBox = data.gearBox;
         rent.capacity = data.capacity;
