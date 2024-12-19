@@ -3,7 +3,7 @@ export const paths = {
     LIST: "/list",
     DETAIL: (id = ":id") => `/detail/${id}`,
     PAYMENT: (id = ":id") => `/payment/${id}`,
-    RESERVATIONS: "/reservations",
+    RESERVATIONS: "/reservation",
     DASHBOARD: {
         MAIN: "/dashboard",
         RENT: {
@@ -12,7 +12,7 @@ export const paths = {
             EDIT: (id = ":id") => `/dashboard/rents/edit/${id}`
         },
         RESERVATIONS: {
-            LIST: "/dashboard/reservations"
+            LIST: "/dashboard/reservation"
         }
     },
 

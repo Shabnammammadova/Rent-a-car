@@ -7,6 +7,11 @@ const reviewSchema = new Schema({
         ref: "User",
         required: true
     },
+    rent: {
+        type: Types.ObjectId,
+        ref: "Rent",
+        required: true,
+    },
     content: {
         type: String,
         required: true

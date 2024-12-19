@@ -36,11 +36,11 @@ export function DatePicker({ onChange, hidePastDates = false, defaultDate, varia
                     className={cn(
                         "w-full justify-start text-left  p-0 hover:bg-transparent text-xs !text-secondary-300 tracking-[-0.24px]",
                         !date && "text-muted-foreground",
-                        variant === "secondary" && "p-4 -bg-[#F6F7F9] hover:[#F6F7F9] text-sm font-normal rounded-md shadow-sm"
+                        variant === "secondary" && "p-6 bg-[#F6F7F9] hover:bg-[#F6F7F9] text-sm font-normal rounded-md shadow-sm"
                     )}
                 >
                     <RenderIf condition={variant === "primary"}>
-                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        <CalendarIcon className="mr-2 h-6 w-4" />
                     </RenderIf>
 
                     {date ? format(date, "PPP") : <span>Pick a date</span>}

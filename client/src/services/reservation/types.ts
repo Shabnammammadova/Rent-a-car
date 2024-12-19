@@ -1,4 +1,4 @@
-import { Reservation } from "@/types"
+import { Reservation, ReservationStatus } from "@/types"
 
 export type CreateReservationRequestPayload = {
     billingAddress: string,
@@ -6,8 +6,8 @@ export type CreateReservationRequestPayload = {
     billingName: string,
     billingPhoneNumber: string,
     startDate: string,
-    endData: string,
-    pickupLocation: string
+    endDate: string,
+    pickUpLocation: string
     dropOffLocation: string,
     rentId: string
 }
@@ -15,4 +15,9 @@ export type CreateReservationRequestPayload = {
 export type CreateReservationResponseType = {
     item?: Reservation,
     message: string
+}
+
+export type ChangeStatusRequestPayload = {
+    id: string;
+    status: ReservationStatus.Approved | ReservationStatus.Rejected
 }

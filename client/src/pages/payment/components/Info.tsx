@@ -1,9 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, UseFormReturn } from "react-hook-form"
 import { z } from "zod"
+import { Controller } from "react-hook-form";
 
-// import { toast } from "@/components/hooks/use-toast"
-// import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
@@ -70,10 +69,7 @@ const FormSchema = z.object({
 
 type FormType = UseFormReturn<z.infer<typeof FormSchema>>
 
-// type Props = {
-//     possibleDropOffLocation: Location[];
-//     pickUpLocation: Location
-// }
+
 
 export const Info = () => {
     const navigate = useNavigate();
@@ -156,6 +152,22 @@ const BillingStep = ({ form }: { form: FormType }) => {
                     </FormItem>
                 )}
             />
+            {/* <FormField
+                control={form.control}
+                name="phoneNumber"
+                render={(field) => (
+                    <FormItem>
+                        <FormLabel>Phone Number</FormLabel>
+                        <FormControl>
+
+                            <PhoneInput   {...field} defaultCountry="US"
+                                international placeholder="Your Number"
+                            />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                )}
+            /> */}
             <FormField
                 control={form.control}
                 name="phoneNumber"
@@ -163,13 +175,25 @@ const BillingStep = ({ form }: { form: FormType }) => {
                     <FormItem>
                         <FormLabel>Phone Number</FormLabel>
                         <FormControl>
-                            {/* <Input placeholder="Phone Number" {...field} /> */}
-                            <PhoneInput defaultCountry="US" international placeholder="Your Number" />
+                            <Controller
+                                name="phoneNumber"
+                                control={form.control}
+                                render={({ field }) => (
+                                    <PhoneInput
+                                        {...field}
+                                        defaultCountry="US"
+                                        international
+                                        placeholder="Your Number"
+                                    />
+                                )}
+                            />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
                 )}
             />
+
+
             <FormField
                 control={form.control}
                 name="address"
@@ -208,20 +232,21 @@ const RentalStep = ({ form }: { form: FormType }) => {
 
 
     const rentData = data?.data as GetByIdRentResponseType || null
-    const possibleDropOffLocationss = rentData?.item.dropOffLocations as Location[] ?? []
+    const possibleDropOffLocationss = rentData?.item.dropOffLocation as Location[] ?? []
     const pickUpLocation = rentData?.item.pickUpLocation as Location
 
 
     useEffect(() => {
         form.setValue("pickUpLocation", pickUpLocation._id)
+
+
     }, [])
-    // const { data: locationData, isLoading: locationLoading } = useQuery({
-    //     queryKey: [QUERY_KEYS.LOCATIONS],
-    //     queryFn: locationService.getAll
-    // })
-
-    // const locations = locationData?.data?.items ?? []
-
+    console.log("pickUpLocation:", pickUpLocation._id);
+    // useEffect(() => {
+    //     if (pickUpLocation && pickUpLocation._id) {
+    //         form.setValue("pickUpLocation", pickUpLocation._id);
+    //     }
+    // }, [pickUpLocation]);
     return <div className="rounded-[10px] bg-white w-full lg:p-6 p-4"><div className="flex justify-between items-end">
         <div>
             <h3 className="text-lg lg:text-xl font-bold leading-[150%] tracking-[-0.6px] text-secondary-500">Rental Info</h3>
@@ -243,23 +268,20 @@ const RentalStep = ({ form }: { form: FormType }) => {
                 name="pickUpLocation"
                 render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Locations</FormLabel>
+                        <FormLabel>Location</FormLabel>
                         <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                                 <SelectTrigger>
                                     <SelectValue placeholder="Select your city" />
                                 </SelectTrigger>
                             </FormControl>
-                            {/* <SelectItem value={pickUpLocation._id} disabled>
-                                {pickUpLocation.name}
-                            </SelectItem> */}
-                            {pickUpLocation && pickUpLocation._id && (
-                                <SelectItem value={pickUpLocation._id} disabled>
-                                    {pickUpLocation.name}
-                                </SelectItem>
-                            )}
-
                             <SelectContent>
+                                {pickUpLocation && pickUpLocation._id && (
+
+                                    <SelectItem value={pickUpLocation._id} disabled>
+                                        {pickUpLocation.name}
+                                    </SelectItem>
+                                )}
                             </SelectContent>
                         </Select>
                         <FormMessage />
@@ -293,7 +315,7 @@ const RentalStep = ({ form }: { form: FormType }) => {
         <div className="grid grid-cols-2 gap-x-6 lg:gap-x-8 gap-y-4 lg:gap-y-6">
             <FormField
                 control={form.control}
-                name="pickUpLocation"
+                name="dropOffLocation"
                 render={({ field }) => (
                     <FormItem>
                         <FormLabel>Location</FormLabel>
@@ -330,7 +352,10 @@ const RentalStep = ({ form }: { form: FormType }) => {
                 render={({ field }) => (
                     <FormItem>
                         <FormLabel>Date</FormLabel>
-                        <DatePicker hidePastDates onChange={(date) => field.onChange(date?.toISOString() || "")} />
+
+                        <DatePicker hidePastDates
+                            variant="secondary"
+                            onChange={(date) => field.onChange(date?.toISOString() || "")} />
                         <FormMessage />
                     </FormItem>
                 )}
@@ -392,7 +417,7 @@ const ConfirmationStep = ({ form, pending }: { form: FormType, pending: boolean 
                     </FormItem>
                 )}
             />
-            <Button disabled={pending} className="lg:mt-8 mt-6">
+            <Button type="submit" disabled={pending} className="lg:mt-8 mt-6">
                 <RenderIf condition={pending}>
                     <Spinner />
                 </RenderIf>

@@ -40,7 +40,7 @@ const PaymentPage = () => {
         )
     }
 
-    const possibleDropOffLocations = rent.dropOffLocations
+    const possibleDropOffLocations = rent.dropOffLocation
 
     return (
         <div className="container py-6  lg:py-8 grid lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_492px] lg:gap-x-8 gap-y-8">

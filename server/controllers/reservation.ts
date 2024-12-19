@@ -3,6 +3,7 @@ import reservation from "../mongoose/schemas/reservation";
 import Rent from "../mongoose/schemas/rent";
 import Reservation from "../mongoose/schemas/reservation";
 import { calculateDateDifference } from "../utils/date";
+import { Rent as TRent } from "../types/schema";
 
 
 const getAll = async (req: Request, res: Response) => {
@@ -12,7 +13,18 @@ const getAll = async (req: Request, res: Response) => {
         if (user?.role !== "admin") {
             filter.user = user?._id.toString() ?? ""
         }
-        const reservations = await reservation.find(filter);
+        const reservations = await reservation.find(filter).populate(
+            "rent",
+            "images price currency name description")
+            .populate("pickUpLocation")
+            .populate("pickUpLocation")
+
+        reservations.forEach((reservation) => {
+            (reservation.rent as TRent).images = (reservation.rent as TRent).images.map((image) => {
+                if (image.includes(process.env.BASE_URL!)) return image;
+                return `${process.env.BASE_URL}/public/rent/${image}`
+            })
+        })
 
         res.json({
             items: reservations,

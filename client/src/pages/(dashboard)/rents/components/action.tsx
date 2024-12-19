@@ -47,7 +47,7 @@ const getformSchema = (isEdit: boolean) => z.object({
         .positive(),
     gearBox: z.string().min(2),
     pickUpLocation: z.string().min(2),
-    dropOffLocations: z.array(z.string().min(2), { message: 'Drop of Location is required' }),
+    dropOffLocation: z.array(z.string().min(2), { message: 'Drop of Location is required' }),
     images: isEdit ? z.any().optional() :
         z
             .instanceof(FileList, { message: "Images are required" })
@@ -66,7 +66,7 @@ const getformSchema = (isEdit: boolean) => z.object({
                     };
                     return Array.from(files).every((file) => allowedTypes[file.type]);
                 },
-                { message: "Invalid file type. Allowed types: JPG, PNG, PDF, DOC, DOCX" }
+                { message: "Invalid file type. Allowed types: JPG, PNG, PDF, DOC, DOCX,WEBP" }
             )
             .refine(
                 (files) => {
@@ -150,7 +150,7 @@ const ActionForm = ({ type }: Props) => {
                 fuel: 0,
                 gearBox: '',
                 pickUpLocation: '',
-                dropOffLocations: [],
+                dropOffLocation: [],
                 images: undefined,
                 showInRecommendation: false,
 
@@ -182,8 +182,8 @@ const ActionForm = ({ type }: Props) => {
             form.setValue('fuel', parseFloat(String(editItem.fuel)))
             form.setValue('gearBox', editItem.gearBox)
             form.setValue('pickUpLocation', editItem.pickUpLocation._id)
-            form.setValue('dropOffLocations',
-                editItem.dropOffLocations.map((item: any) => item._id))
+            form.setValue('dropOffLocation',
+                editItem.dropOffLocation.map((item) => item._id))
             form.setValue('capacity',
                 editItem.capacity)
             form.setValue('showInRecommendation', editItem.showInRecommendation)
@@ -280,24 +280,16 @@ const ActionForm = ({ type }: Props) => {
                                 <FormItem>
                                     <FormLabel>Price</FormLabel>
                                     <FormControl>
-                                        {/* <Input
+                                        <Input
                                             type="number"
                                             placeholder="100"
                                             {...field}
+                                            value={field.value || ""}
                                             onChange={(e) => {
-                                                field.onChange({ target: { value: parseFloat(e.target.value) } });
+                                                const value = e.target.value;
+                                                field.onChange(value === "" ? "" : parseFloat(value));
                                             }}
-                                        /> */
-                                            <Input
-                                                type="number"
-                                                placeholder="100"
-                                                {...field}
-                                                value={field.value || ""}
-                                                onChange={(e) => {
-                                                    const value = e.target.value;
-                                                    field.onChange(value === "" ? "" : parseFloat(value));
-                                                }}
-                                            />}
+                                        />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -375,7 +367,7 @@ const ActionForm = ({ type }: Props) => {
                         />
                         <FormField
                             control={form.control}
-                            name="dropOffLocations"
+                            name="dropOffLocation"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Drop Off Locations</FormLabel>

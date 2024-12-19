@@ -15,6 +15,5 @@ router.patch("/:id/change-status", authorize({ isAdmin: true }),
 
 
 
-console.log(new Date());
 
 export default router

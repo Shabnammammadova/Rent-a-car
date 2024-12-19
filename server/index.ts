@@ -11,6 +11,7 @@ import locationRoutes from "./routes/location"
 import categoryRoutes from "./routes/category"
 import rentRoutes from "./routes/rent"
 import reservationRoutes from "./routes/reservation"
+import reviewRoutes from "./routes/review"
 import "./auth/local-strategy";
 import path from "path";
 
@@ -51,6 +52,7 @@ app.use("/location", locationRoutes)
 app.use("/category", categoryRoutes)
 app.use("/rent", rentRoutes)
 app.use("/reservation", reservationRoutes)
+app.use("review", reviewRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

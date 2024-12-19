@@ -26,7 +26,7 @@ export type Rent = {
     description: string,
     discount: number;
     category: Category;
-    dropOffLocations: Location[];
+    dropOffLocation: Location[];
     images: string[];
     pickUpLocation: Location;
     showInRecommendation: boolean
@@ -48,13 +48,15 @@ export type Reservation = {
     dropOffLocation: string;
     id: string;
     pickupLocation: string;
-    rent: string;
+    rent: Rent | string;
     startDate: string;
+    endDate: string;
     status: ReservationStatus;
     total: number;
     updatedAt: string;
     user: string;
-    _id: string
+    _id: string;
+    hasReview: boolean
 }
 export type SelectOption = {
     value: string,

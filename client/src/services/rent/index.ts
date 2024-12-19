@@ -25,8 +25,8 @@ const create = async (data: CreateRentRequestPayload) => {
     formData.append("discount", data.discount.toString());
     formData.append("categoryId", data.categoryId);
     formData.append("pickUpLocation", data.pickUpLocation);
-    data.dropOffLocations.forEach((location) => {
-        formData.append("dropOffLocations", location)
+    data.dropOffLocation.forEach((location, index) => {
+        formData.append(`dropOffLocation[${index}]`, location)
     });
     if (data.images)
         Array.from(data.images).forEach((image) => {
@@ -49,8 +49,8 @@ const edit = async (data: CreateRentRequestPayload & { id?: string }) => {
     formData.append("discount", data.discount.toString());
     formData.append("categoryId", data.categoryId);
     formData.append("pickUpLocation", data.pickUpLocation);
-    data.dropOffLocations.forEach((location, index) => {
-        formData.append(`dropOffLocations[${index}]`, location)
+    data.dropOffLocation.forEach((location, index) => {
+        formData.append(`dropOffLocation[${index}]`, location)
     });
 
     if (data.images)

@@ -43,21 +43,21 @@ const getAll = async (req: Request, res: Response) => {
         }
         if (pickup_location) {
             filter.pickUpLocation = pickup_location
-            console.log(pickup_location);
+
 
         }
         if (dropoff_location) {
             filter.dropOffLocation = {
                 $in: [dropoff_location]
             }
-            console.log(dropoff_location);
+
 
         }
         if (filter.$and.length === 0) {
             delete filter.$and
         }
 
-        console.log(filter);
+
 
 
         const items = await Rent.find(filter).skip(+skip).limit(+take).populate(["category", "pickUpLocation", "dropOffLocation"]);

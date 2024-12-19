@@ -37,7 +37,7 @@ export const RentCard = ({ rent }: Props) => {
 
     const mainImage = images[0]
     function navigateDetail() {
-        navigate(paths.DETAIL(id))
+        navigate(paths.DETAIL(_id))
     }
     return (
         <div className="w-full bg-white rounded-[10px] p-4 lg:p-6">

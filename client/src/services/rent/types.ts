@@ -22,7 +22,7 @@ export type CreateRentRequestPayload = {
     capacity: number;
     discount: number;
     categoryId: string;
-    dropOffLocations: string[];
+    dropOffLocation: string[];
     images?: File[];
     pickUpLocation: string;
     showInRecommendation: boolean

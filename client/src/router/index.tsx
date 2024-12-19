@@ -15,6 +15,8 @@ import AuthLayout from "@/components/shared/AuthLayout";
 import ReservationPage from "@/pages/reservations";
 import DashboardReservationPage from "@/pages/(dashboard)/reservations/list";
 
+
+
 export const router = createBrowserRouter([
     {
         path: "",
