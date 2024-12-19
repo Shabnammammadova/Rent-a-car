@@ -14,6 +14,7 @@ import { createBrowserRouter } from "react-router-dom";
 import AuthLayout from "@/components/shared/AuthLayout";
 import ReservationPage from "@/pages/reservations";
 import DashboardReservationPage from "@/pages/(dashboard)/reservations/list";
+import DashboardOverviewPage from "@/pages/(dashboard)/overview";
 
 
 
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
                     {
                         path: paths.DASHBOARD.MAIN,
                         element: <DashboardMainPage />
+                    },
+                    {
+                        path: paths.DASHBOARD.OVERVIEW,
+                        element: <DashboardOverviewPage />
                     },
                     {
                         path: paths.DASHBOARD.RENT.LIST,

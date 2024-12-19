@@ -13,6 +13,7 @@ import rentRoutes from "./routes/rent"
 import reservationRoutes from "./routes/reservation"
 import reviewRoutes from "./routes/review"
 import "./auth/local-strategy";
+import "./auth/google-strategy"
 import path from "path";
 
 dotenv.config();

@@ -10,7 +10,7 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-
+import GoogleIcon from "@/assets/images/google-icon.png"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -117,6 +117,17 @@ export const LoginDialog = () => {
 
                         </form>
                     </Form>
+                    <div className="mt-4 text-center">
+                        <button
+                            className="w-[300px] mb-2 mt-2 flex mx-auto  justify-center items-center gap-8 p-2 cursor-pointer border border-solid rounded-3xl  border-inherit"
+                            onClick={() => {
+                                window.location.href = "http://localhost:3000/auth/google";
+                            }}
+                        >
+                            <img src={GoogleIcon} className="w-[1.5rem] h-[1.5rem]" alt="" />
+                            Sign In with Google
+                        </button>
+                    </div>
                 </DialogContent>
             </>
 

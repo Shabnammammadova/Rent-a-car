@@ -6,6 +6,7 @@ export const paths = {
     RESERVATIONS: "/reservation",
     DASHBOARD: {
         MAIN: "/dashboard",
+        OVERVIEW: "/overview",
         RENT: {
             LIST: "/dashboard/rents",
             CREATE: "/dashboard/rents/create",

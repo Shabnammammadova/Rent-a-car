@@ -10,6 +10,7 @@ import { authenticate, authorize } from "../middlewares/user";
 
 import validateSchema from "../middlewares/validation";
 import authController from "../controllers/auth";
+import passport from "passport";
 
 const router = Router();
 
@@ -20,6 +21,13 @@ router.post("/register", validateSchema(registerSchema), authController.register
 router.post("/logout", authController.logout);
 
 router.get("/current-user", authorize({}), authController.currentUser);
+
+router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+
+router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/login" }), (req, res) => {
+    res.redirect("http://localhost:5173");
+}
+);
 
 router.post(
     "/forgot-password",
