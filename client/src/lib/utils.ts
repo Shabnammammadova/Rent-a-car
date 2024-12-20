@@ -12,8 +12,8 @@ export function formatPrice(price: number) {
   })
 }
 
-export function formatDate(date: string) {
-  return moment(date).format("DD/MM/YYYY")
+export function formatDate(date: string, format = "DD/MM/YYYY") {
+  return moment(date).format(format)
 }
 
 export function calculateDateDifference(startDate: Date | string, endDate: Date | string) {

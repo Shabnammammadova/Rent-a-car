@@ -28,3 +28,15 @@ export const createReviewSchema: Schema = {
     }
 
 }
+
+
+export const changeStatusSchema: Schema = {
+    status: {
+        in: ["body"],
+        isString: true,
+        notEmpty: true,
+        isIn: {
+            options: [["approved", "rejected"]]
+        }
+    }
+}

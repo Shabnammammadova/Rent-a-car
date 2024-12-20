@@ -20,15 +20,17 @@ type Props = {
 
 export const InformationSection = ({ rent }: Props) => {
     const [isliked, setisLiked] = useState(false)
-    const { _id, name, description, fuel, gearBox, capacity, category, price, discount } = rent;
+    const { _id, name, description, fuel, gearBox, capacity, category, price, discount, reviews } = rent;
     const { user } = useSelector(selectUserData)
-    const { openDialog } = useDialog()
+    const { openDialog } = useDialog();
+
+    const rating = Math.round(reviews.reduce((acc, review) => review.rating + acc, 0) / reviews.length)
     return (
         <div className="bg-white rounded-[10px] p-4 lg:p-6 relative">
             <h1 className="text-secondary-500 text-2xl lg:text-[32px] !leading-[150%] tracking-[-0.96px] font-bold">{name}</h1>
             <div className="mt-2  flex items-center gap-x-2">
-                <ReviewStar rating={3} />
-                <p className="text-secondary text-sm font-medium tracking-[-0.28px]">440+ Reviewer</p>
+                <ReviewStar rating={rating} />
+                <p className="text-secondary text-sm font-medium tracking-[-0.28px]">{reviews.length} Reviewer</p>
                 <button className="h-fit absolute right-6 top-6" onClick={() => setisLiked(!isliked)}><img src={isliked ? HeartFilldeRed : HeartOutlined} alt="heart" /></button>
             </div>
             <p className="min-h=[160px] my-5 lg:my-8 text-lg lg:text-xl !leading-[200%] tracking-[-0.4px] text-secondary">{description}</p>

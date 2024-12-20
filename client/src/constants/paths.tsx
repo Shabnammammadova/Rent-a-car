@@ -14,6 +14,9 @@ export const paths = {
         },
         RESERVATIONS: {
             LIST: "/dashboard/reservation"
+        },
+        REVIEWS: {
+            LIST: "/dashboard/reviews"
         }
     },
 

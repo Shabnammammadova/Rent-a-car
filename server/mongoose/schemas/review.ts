@@ -25,6 +25,11 @@ const reviewSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    status: {
+        type: String,
+        enum: ["pending", "approved", "rejected"],
+        default: "pending"
     }
 });
 

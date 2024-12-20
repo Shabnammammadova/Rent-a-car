@@ -57,7 +57,7 @@ const RentDetailPage = () => {
                 <ImagesSection images={rent.images} />
                 <InformationSection rent={rent} />
             </div>
-            <ReviewsSection />
+            <ReviewsSection reviews={rent.reviews} />
             <List maxCols={3} heading="Recent Cars" />
             <List maxCols={3} heading="Recomendation Cars" isLoading={recommendedLoading} rents={recommendedrents} />
             <ScrollToTop />

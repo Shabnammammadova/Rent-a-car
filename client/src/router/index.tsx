@@ -1,5 +1,4 @@
 import DashboardLayout from "@/components/shared/DashboardLayout";
-import ForgotPassword from "@/components/shared/dialogs/ForgotPassword";
 import RootLayout from "@/components/shared/RootLayout";
 import { paths } from "@/constants/paths";
 import DashboardMainPage from "@/pages/(dashboard)/main";
@@ -15,6 +14,7 @@ import AuthLayout from "@/components/shared/AuthLayout";
 import ReservationPage from "@/pages/reservations";
 import DashboardReservationPage from "@/pages/(dashboard)/reservations/list";
 import DashboardOverviewPage from "@/pages/(dashboard)/overview";
+import DashboardReviewListPage from "@/pages/(dashboard)/review/list";
 
 
 
@@ -50,10 +50,6 @@ export const router = createBrowserRouter([
                 ],
             },
             {
-                path: "/forgot-password",
-                element: <ForgotPassword />
-            },
-            {
                 path: "",
                 element: <DashboardLayout />,
                 children: [
@@ -80,6 +76,10 @@ export const router = createBrowserRouter([
                     {
                         path: paths.DASHBOARD.RESERVATIONS.LIST,
                         element: <DashboardReservationPage />
+                    },
+                    {
+                        path: paths.DASHBOARD.REVIEWS.LIST,
+                        element: <DashboardReviewListPage />
                     }
                 ]
             }
