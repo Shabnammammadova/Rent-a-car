@@ -13,11 +13,12 @@ const getAll = async (req: Request, res: Response) => {
         if (user?.role !== "admin") {
             filter.user = user?._id.toString() ?? ""
         }
-        const reservations = await reservation.find(filter).populate(
-            "rent",
-            "images price currency name description")
+        const reservations = await reservation.find(filter)
+            .populate("rent", "images price currency name description")
             .populate("pickUpLocation")
             .populate("pickUpLocation")
+
+
 
         reservations.forEach((reservation) => {
             (reservation.rent as TRent).images = (reservation.rent as TRent).images.map((image) => {
@@ -38,6 +39,9 @@ const getAll = async (req: Request, res: Response) => {
 
     }
 }
+
+
+
 const create = async (req: Request, res: Response) => {
     try {
         const { startDate, endDate, dropOffLocation, pickUpLocation, billingName, billingAddress, billingPhoneNumber, billingTownCity, rentId } = req.matchedData

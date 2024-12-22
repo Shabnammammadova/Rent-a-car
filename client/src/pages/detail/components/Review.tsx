@@ -11,7 +11,9 @@ type Props = {
 export const Review = ({ review }: Props) => {
 
     const { author, createdAt, rating, content } = review
-    const fullName = `${author.name}${author.surname}`
+    const fullName = `${author.name}`
+    console.log(fullName);
+
     return (
         <div className="flex gap-x-4">
             <div className="bg-primary rounded-full h-14 w-14 p-3"><User2Icon className="w-full h-full text-white" /></div>
@@ -19,8 +21,7 @@ export const Review = ({ review }: Props) => {
                 <div className="flex items-center justify-between w-full">
                     <h6 className="text-secondary-500 text-lg lg:text-xl font-bold leading-[150%] tracking-[-0.6px]">{fullName}</h6>
                     <div className="-translate-y-3">
-                        <p className="text-secondary-300 text-sm font-medium leading-[150%] trackung-[-0.28px] text-end mb-2">21 July 2022
-
+                        <p className="text-secondary-300 text-sm font-medium leading-[150%] trackung-[-0.28px] text-end mb-2">
                             {formatDate(createdAt, "DD MMM yyyy")}
                         </p>
                         <ReviewStar rating={rating} />

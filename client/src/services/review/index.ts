@@ -11,7 +11,7 @@ const getAll = async () => {
 
 const changeStatus = async (data: ChangeStatusRequestPayload) => {
     return await axiosInstance.patch(`/review/${data.id}/change-status`, {
-        statusbar: data.status
+        status: data.status
     })
 }
 const reviewService = { create, getAll, changeStatus }

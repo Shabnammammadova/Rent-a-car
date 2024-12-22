@@ -1,5 +1,5 @@
 import { ModalEnum, useDialog } from "@/hooks/useDialog"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, } from "../../ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogHeader } from "../../ui/dialog"
 import {
     Form,
     FormControl,
@@ -68,12 +68,8 @@ export const ForgotPasswordDialog = () => {
             <>
                 <DialogContent className="bg-white">
                     <DialogHeader>
-                        <DialogTitle className="text-xl lg:text-3xl">Sign In</DialogTitle>
                         <DialogDescription>
-
-                            Don't have an account?{""}
                             <button onClick={() => openDialog(ModalEnum.FORGOTPASSWORD)} className="text-primary">Send link</button>
-
                         </DialogDescription>
                     </DialogHeader>
                     <Form {...form}>
@@ -94,7 +90,7 @@ export const ForgotPasswordDialog = () => {
 
                             <Button className="w-full"
                                 disabled={isPending}
-                                type="submit">Sign In</Button>
+                                type="submit">Back</Button>
 
                         </form>
                     </Form>

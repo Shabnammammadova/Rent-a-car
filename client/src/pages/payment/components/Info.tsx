@@ -92,8 +92,10 @@ export const Info = () => {
     const { mutate, isPending } = useMutation({
         mutationFn: reservationService.create,
         onSuccess: () => {
+            console.log("reservation created succesfully");
+
             toast.success("Reservation created successfully")
-            navigate(paths.RESERVATIONS);
+            navigate(paths.RESERVATIONS)
             form.reset()
         },
         onError:
@@ -102,6 +104,8 @@ export const Info = () => {
             }
     })
     function onSubmit(data: z.infer<typeof FormSchema>) {
+        console.log(data);
+
         const payload = {
             rentId: id!,
             startDate: data.pickUpDate,
@@ -114,11 +118,12 @@ export const Info = () => {
             pickUpLocation: data.pickUpLocation
         }
         mutate(payload)
+        console.log(payload);
 
     }
 
     return (
-        <Form {...form}>
+        <Form {...form}  >
             <form className="flex flex-col lg:gap-y-8 gap-y-6 lg:order-none order-1" onSubmit={form.handleSubmit(onSubmit)}>
                 <BillingStep form={form} />
                 <RentalStep form={form} />
@@ -230,10 +235,11 @@ const RentalStep = ({ form }: { form: FormType }) => {
     const queryClient = useQueryClient();
     const data = queryClient.getQueryData([QUERY_KEYS.RENT_DETAIL, id]) as AxiosResponse;
 
-
     const rentData = data?.data as GetByIdRentResponseType || null
-    const possibleDropOffLocationss = rentData?.item.dropOffLocation as Location[] ?? []
-    const pickUpLocation = rentData?.item.pickUpLocation as Location
+    const possibleDropOffLocations = rentData?.item.dropOffLocation as Location[] ?? []
+    const pickUpLocation = rentData?.item.pickUpLocation as Location || null
+
+
 
 
     useEffect(() => {
@@ -241,7 +247,7 @@ const RentalStep = ({ form }: { form: FormType }) => {
 
 
     }, [])
-    console.log("pickUpLocation:", pickUpLocation._id);
+    // console.log("pickUpLocation:", pickUpLocation._id);
     // useEffect(() => {
     //     if (pickUpLocation && pickUpLocation._id) {
     //         form.setValue("pickUpLocation", pickUpLocation._id);
@@ -326,14 +332,14 @@ const RentalStep = ({ form }: { form: FormType }) => {
                                 </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                                <RenderIf condition={possibleDropOffLocationss.length === 0}>
+                                <RenderIf condition={possibleDropOffLocations.length === 0}>
                                     <SelectItem value="-" disabled>
                                         No drop off locations available
 
                                     </SelectItem>
                                 </RenderIf>
-                                {possibleDropOffLocationss.map((location) => (
-                                    <SelectItem key={location._id} value="loading">
+                                {possibleDropOffLocations.map((location) => (
+                                    <SelectItem key={location._id} value={location._id}>
                                         {location.name}
                                     </SelectItem>
 
@@ -348,7 +354,7 @@ const RentalStep = ({ form }: { form: FormType }) => {
             />
             <FormField
                 control={form.control}
-                name="pickUpDate"
+                name="dropOffDate"
                 render={({ field }) => (
                     <FormItem>
                         <FormLabel>Date</FormLabel>

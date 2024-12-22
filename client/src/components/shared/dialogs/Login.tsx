@@ -21,6 +21,7 @@ import { AuthResponseType } from "@/services/auth/types"
 import { toast } from "sonner"
 import { getCurrentUserAsync } from "@/store/features/userSlice"
 import { useAppDispatch } from "@/hooks/redux"
+import { Link } from "react-router-dom"
 const formSchema = z.object({
     email: z.string().min(2).max(50),
     password: z.string().min(2).max(50),
@@ -109,7 +110,9 @@ export const LoginDialog = () => {
                                     </FormItem>
                                 )}
                             />
-                            <button onClick={() => openDialog(ModalEnum.FORGOTPASSWORD)} className="text-primary m-auto flex justify-center underline">Forget Password?</button>
+                            {/* <button onClick={() => openDialog(ModalEnum.FORGOTPASSWORD)} className="text-primary m-auto flex justify-center underline">Forget Password?</button> */}
+
+                            {/* <Link to={ } className="text-primary m-auto flex justify-center underline">Forgot Password</Link> */}
                             <Button className="w-full"
                                 disabled={isPending}
                                 type="submit">Sign In</Button>

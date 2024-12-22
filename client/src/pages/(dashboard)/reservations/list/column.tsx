@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+
 import { RenderIf } from "@/components/shared/RenderIf";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { QUERY_KEYS } from "@/constants/query-keys";
@@ -8,7 +8,6 @@ import { Rent, Reservation, ReservationStatus } from "@/types"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table"
 import { CheckCircle2Icon, Edit2Icon, XCircleIcon } from "lucide-react";
-import moment from "moment"
 import { toast } from "sonner";
 
 
@@ -100,6 +99,7 @@ export const columns: ColumnDef<Reservation>[] = [
         accessorKey: "",
         header: "Actions",
         cell: (data) => {
+
             const queryClient = useQueryClient()
             const { mutate } = useMutation(
                 {

@@ -13,7 +13,7 @@ const create = async (data: CreateReservationRequestPayload) => {
 
 const changeStatus = async (data: ChangeStatusRequestPayload) => {
     return await axiosInstance.patch(`/reservation/${data.id}/change-status`, {
-        statusbar: data.status
+        status: data.status
     })
 }
 const cancel = async (data: { id: string }) => {

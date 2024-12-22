@@ -68,7 +68,7 @@ const ReservationCard = ({ reservation }: { reservation: Reservation }) => {
         <div className="bg-white shadow-md rounded-lg p-4 relative">
             <div className="flex items-end justify-between">
                 <div className="flex items-center">
-                    <img src={rent.images[0]} alt="" className="w-24 h-24 object-cover rounded-lg" />
+                    <img src={rent.images[0]} alt="" className="w-24 h-24 object-contain rounded-lg" />
                     <div className="ml-4">
                         <div className="flex items-center gap-x-4">
                             <h2 className="text-lg font-semibold">{rent.name}</h2>
@@ -157,6 +157,8 @@ const WriteReview = ({ rentId, reservationId }: {
             rentId,
             reservationId,
         })
+        console.log();
+
     }
     return (
         <div className="mt-4">
@@ -173,7 +175,7 @@ const WriteReview = ({ rentId, reservationId }: {
                 </div>
                 <textarea ref={contentRef} placeholder="Write your review here" className="w-full h-24 border border-gray-200 rounded-lg p-2" />
             </div>
-            <Button disabled={isPending} onSubmit={onSubmitReview} size="sm" className="mt-2">
+            <Button disabled={isPending} onClick={onSubmitReview} size="sm" className="mt-2">
                 <RenderIf condition={isPending}>
                     <Spinner />
                 </RenderIf>

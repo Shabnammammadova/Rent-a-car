@@ -8,7 +8,7 @@ export const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-y-4 lg:gap-x-8">
             <div className=" relative bg-information h-[280px] lg:h-[320px] xl:h-[360px] w-full rounded-[10px]">
                 <img src={HeroCarImage1} alt="Car 1"
-                    className="w-full h-full object-cover object-bottom" />
+                    className="w-full h-full object-contain object-bottom" />
                 <div className="absolute left-6 top-6 s max-w-[284px]">
                     <h1 className="text-[28px] text-white leading-[150%] lg:text-[32px] tracking-[-0.96px] font-semibold mb-5">
                         The Best Platform for Car Rental
@@ -22,7 +22,7 @@ export const Hero = () => {
             </div>
             <div className="relative bg-primary h-[280px] lg:h-[320px] xl:h-[360px] w-ful rounded-[10px]">
                 <img src={HeroCarImage2} alt="Car 2"
-                    className="w-full h-full object-cover object-bottom" />
+                    className="w-full h-full object-contain object-bottom" />
                 <div className="absolute left-6 top-6 max-w-[284px]">
                     <h1 className="text-[28px] text-white leading-[150%] lg:text-[32px] tracking-[-0.96px] font-semibold mb-5">
                         Easy way to rent a car at a low price

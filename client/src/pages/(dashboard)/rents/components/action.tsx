@@ -444,7 +444,7 @@ const ActionForm = ({ type }: Props) => {
                         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
                             {
                                 editItem?.images.map((image: string) => (
-                                    <img src={image} alt="Rent Image" className="w-full object-cover rounded-lg" />
+                                    <img src={image} alt="Rent Image" className="w-full object-contain rounded-lg" />
                                 ))
                             }
                         </div>

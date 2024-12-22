@@ -23,6 +23,8 @@ export const InformationSection = ({ rent }: Props) => {
     const { _id, name, description, fuel, gearBox, capacity, category, price, discount, reviews } = rent;
     const { user } = useSelector(selectUserData)
     const { openDialog } = useDialog();
+    console.log(reviews.length);
+
 
     const rating = Math.round(reviews.reduce((acc, review) => review.rating + acc, 0) / reviews.length)
     return (
