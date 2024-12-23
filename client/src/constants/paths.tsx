@@ -1,6 +1,8 @@
 export const paths = {
     HOME: "/",
     LIST: "/list",
+    FORGOTPASSWORD: "/forgot-password",
+    RESETPASSWORD: (token = ":token") => `/reset-password/${token}`,
     DETAIL: (id = ":id") => `/detail/${id}`,
     PAYMENT: (id = ":id") => `/payment/${id}`,
     RESERVATIONS: "/reservation",
@@ -17,7 +19,8 @@ export const paths = {
         },
         REVIEWS: {
             LIST: "/dashboard/reviews"
-        }
+        },
+        CHAT: "/dashboard/chat",
     },
 
 }

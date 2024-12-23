@@ -15,6 +15,10 @@ import ReservationPage from "@/pages/reservations";
 import DashboardReservationPage from "@/pages/(dashboard)/reservations/list";
 import DashboardOverviewPage from "@/pages/(dashboard)/overview";
 import DashboardReviewListPage from "@/pages/(dashboard)/review/list";
+import ChatPage from "@/pages/(dashboard)/chat";
+import { ForgotPassword } from "@/pages/forgot-password";
+import { ResetPassword } from "@/pages/reset-password";
+
 
 
 
@@ -30,6 +34,14 @@ export const router = createBrowserRouter([
             {
                 path: paths.LIST,
                 element: <RentListPage />
+            },
+            {
+                path: paths.FORGOTPASSWORD,
+                element: <ForgotPassword />
+            },
+            {
+                path: paths.RESETPASSWORD(),
+                element: <ResetPassword />
             },
             {
                 path: paths.DETAIL(),
@@ -80,6 +92,10 @@ export const router = createBrowserRouter([
                     {
                         path: paths.DASHBOARD.REVIEWS.LIST,
                         element: <DashboardReviewListPage />
+                    },
+                    {
+                        path: paths.DASHBOARD.CHAT,
+                        element: <ChatPage />
                     }
                 ]
             }

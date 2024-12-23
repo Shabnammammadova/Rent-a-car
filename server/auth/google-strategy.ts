@@ -25,7 +25,7 @@ passport.use(
                         name: profile.name?.givenName,
                         surname: profile.name?.familyName ?? profile.name?.givenName,
                         email: profile.emails?.[0].value,
-                        password: "Salam123!"
+                        password: "123Salam!!"
                     });
                     await user.save();
                 }

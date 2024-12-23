@@ -7,7 +7,7 @@ import { AreaVisitorChart } from "./chart-visitors"
 
 const DashboardOverviewPage = () => {
     return (
-        <>
+        <div className="pt-6">
             <div className="flex justify-between gap-2">
                 <AreaVisitorChart />
                 <BarCarChart />
@@ -15,7 +15,7 @@ const DashboardOverviewPage = () => {
             </div>
             <InteractiveChart />
 
-        </>
+        </div>
     )
 }
 

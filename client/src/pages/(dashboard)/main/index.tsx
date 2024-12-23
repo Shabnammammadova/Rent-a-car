@@ -2,7 +2,7 @@
 
 const DashboardMainPage = () => {
     return (
-        <div>DashboardMainPage</div>
+        <div className="pt-6">DashboardMainPage</div>
     )
 }
 

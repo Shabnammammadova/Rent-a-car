@@ -21,8 +21,8 @@ const DashboardLayout = () => {
     <>
       <SidebarProvider>
         <DashboardSidebar />
-        <main className="w-full px-6">
-          <SidebarTrigger className="my-4" />
+        <main className="w-full px-6 relative pt-4">
+          <SidebarTrigger className=" absolute left-8 top-6" />
           <div className="p-6 rounded-[10px] bg-white w-full">
             <Outlet />
           </div>

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sidebar"
 import { paths } from "@/constants/paths"
 
-import { Calendar1Icon, CarIcon, ChartNoAxesCombined, Home, MessageSquareMoreIcon } from "lucide-react"
+import { Calendar1Icon, CarIcon, ChartNoAxesCombined, Home, MessageCircle, MessageSquareMoreIcon } from "lucide-react"
 
 
 const items = [
@@ -39,6 +39,12 @@ const items = [
         url: paths.DASHBOARD.REVIEWS.LIST,
         icon: MessageSquareMoreIcon,
     },
+    {
+        title: "Chat",
+        url: paths.DASHBOARD.CHAT,
+        icon: MessageCircle
+    }
+
 
 ]
 export const DashboardSidebar = () => {

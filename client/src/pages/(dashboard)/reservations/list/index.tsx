@@ -26,7 +26,7 @@ const DashboardReservationPage = () => {
 
     const items = data?.data?.items || []
     return (
-        <div>
+        <div className="pt-6">
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-primary font-bold text-2xl ">
                     Reservations

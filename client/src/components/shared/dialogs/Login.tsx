@@ -21,7 +21,7 @@ import { AuthResponseType } from "@/services/auth/types"
 import { toast } from "sonner"
 import { getCurrentUserAsync } from "@/store/features/userSlice"
 import { useAppDispatch } from "@/hooks/redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 const formSchema = z.object({
     email: z.string().min(2).max(50),
     password: z.string().min(2).max(50),
@@ -40,6 +40,7 @@ export const LoginDialog = () => {
         },
     })
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const { mutate, isPending } = useMutation({
         mutationFn: authService.login,
         onSuccess: (response) => {
@@ -64,7 +65,10 @@ export const LoginDialog = () => {
 
         mutate(values)
     }
-
+    const handleForgotPasswordClick = () => {
+        closeDialog();
+        navigate("/forgot-password");
+    };
 
 
     return (
@@ -110,9 +114,8 @@ export const LoginDialog = () => {
                                     </FormItem>
                                 )}
                             />
-                            {/* <button onClick={() => openDialog(ModalEnum.FORGOTPASSWORD)} className="text-primary m-auto flex justify-center underline">Forget Password?</button> */}
 
-                            {/* <Link to={ } className="text-primary m-auto flex justify-center underline">Forgot Password</Link> */}
+                            <Link to={"/forgot-password"} className="text-primary m-auto flex justify-center underline" onClick={handleForgotPasswordClick}>Forgot Password?</Link>
                             <Button className="w-full"
                                 disabled={isPending}
                                 type="submit">Sign In</Button>

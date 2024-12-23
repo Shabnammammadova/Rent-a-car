@@ -113,7 +113,7 @@ const resetPassword = async (req: Request, res: Response) => {
 
     if (!user) {
         res.status(400).json({ message: "Invalid or expired token" });
-        return
+        return;
     }
 
     user.password = hashPassword(password);
@@ -124,7 +124,9 @@ const resetPassword = async (req: Request, res: Response) => {
     res.json({
         message: "Password reset successful",
     });
-}
+};
+
+
 
 const authController = {
     login,
