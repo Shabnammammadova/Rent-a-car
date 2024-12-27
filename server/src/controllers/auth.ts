@@ -1,9 +1,10 @@
-import { Request, Response } from "express"
-import { hashPassword } from "../utils/bcrypt";
-import User from "../mongoose/schemas/user"
-import { IUser } from "../types/user";
-import { transporter } from "../utils/mail";
 import crypto from "crypto"
+import { Request, Response } from "express";
+import { hashPassword } from "../utils/bcrypt";
+
+import User from "../mongoose/schemas/user";
+import { transporter } from "../utils/mail";
+import { IUser } from "../types/user";
 
 
 const login = (req: Request, res: Response) => {
@@ -27,7 +28,7 @@ const register = async (req: Request, res: Response) => {
         res.status(400).json({
             message: "User already exists with this email",
         });
-        return
+        return;
     }
 
     const newUser = new User(user);
@@ -35,7 +36,6 @@ const register = async (req: Request, res: Response) => {
 
     const userObj: IUser = newUser.toObject();
     delete userObj.password;
-
     res.json({
         message: "Register successful",
         user: userObj,

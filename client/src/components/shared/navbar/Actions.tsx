@@ -58,7 +58,7 @@ export const Actions = () => {
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         {
-                            user.role === UserRole.Admin && <DropdownMenuItem>
+                            user.role === UserRole.Admin && <DropdownMenuItem asChild>
                                 <Link to={paths.DASHBOARD.MAIN}>Dashboard</Link>
                             </DropdownMenuItem>
                         }

@@ -6,6 +6,9 @@ import session from "express-session";
 import passport from "passport";
 import cors from "cors";
 
+import { createServer } from 'node:http';
+
+
 import authRoutes from "./routes/auth";
 import locationRoutes from "./routes/location"
 import categoryRoutes from "./routes/category"
@@ -15,12 +18,19 @@ import reviewRoutes from "./routes/review"
 import "./auth/local-strategy";
 import "./auth/google-strategy"
 import path from "path";
+import { connectSocket } from "./socket";
+import conversationRoutes from "./routes/conversation"
+
 
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+const server = createServer(app);
+
+
+connectSocket(server)
 
 app.use(express.json());
 app.use(cookieParser());
@@ -54,8 +64,11 @@ app.use("/category", categoryRoutes)
 app.use("/rent", rentRoutes)
 app.use("/reservation", reservationRoutes)
 app.use("/review", reviewRoutes)
+app.use("/conversation", conversationRoutes)
 
-app.listen(PORT, () => {
+
+
+server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 

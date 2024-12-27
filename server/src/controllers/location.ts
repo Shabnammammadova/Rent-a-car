@@ -12,14 +12,19 @@ const getAll = async (req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
     const { name } = req.matchedData;
-
-    const location = new Location({ name });
-
-    await location.save();
-    res.status(201).json({
-        message: "Location created succesfully",
-        item: location
-    })
+    try {
+        const location = new Location({ name });
+        await location.save();
+        res.status(201).json({
+            message: "Location created successfully",
+            item: location,
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: "Error creating location",
+        });
+    }
 }
 
 

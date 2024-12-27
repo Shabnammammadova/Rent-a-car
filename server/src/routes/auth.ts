@@ -6,11 +6,13 @@ import {
     resetPasswordSchema,
 } from "../validation/auth";
 
-import { authenticate, authorize } from "../middlewares/user";
 
-import validateSchema from "../middlewares/validation";
-import authController from "../controllers/auth";
+
 import passport from "passport";
+
+import authController from "../controllers/auth";
+import { authenticate, authorize } from "../middlewares/user";
+import validateSchema from "../middlewares/validation";
 
 const router = Router();
 

@@ -18,6 +18,8 @@ import DashboardReviewListPage from "@/pages/(dashboard)/review/list";
 import ChatPage from "@/pages/(dashboard)/chat";
 import { ForgotPassword } from "@/pages/forgot-password";
 import { ResetPassword } from "@/pages/reset-password";
+import DashboardLocationPage from "@/pages/(dashboard)/location/list";
+import DashboardCreateLocationPage from "@/pages/(dashboard)/location/create";
 
 
 
@@ -94,8 +96,20 @@ export const router = createBrowserRouter([
                         element: <DashboardReviewListPage />
                     },
                     {
-                        path: paths.DASHBOARD.CHAT,
+                        path: paths.DASHBOARD.CHAT.VIEW,
                         element: <ChatPage />
+                    },
+                    {
+                        path: paths.DASHBOARD.CHAT.USER(),
+                        element: <ChatPage />
+                    },
+                    {
+                        path: paths.DASHBOARD.LOCATION.LIST,
+                        element: <DashboardLocationPage />
+                    },
+                    {
+                        path: paths.DASHBOARD.LOCATION.CREATE,
+                        element: <DashboardCreateLocationPage />
                     }
                 ]
             }

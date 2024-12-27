@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import passport from "passport";
 import { IUser } from "../types/user";
 
+
 export const authorize =
     ({ isAdmin = false }) =>
         (req: Request, res: Response, next: NextFunction) => {
