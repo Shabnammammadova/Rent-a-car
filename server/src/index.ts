@@ -17,6 +17,7 @@ import reservationRoutes from "./routes/reservation"
 import reviewRoutes from "./routes/review"
 import "./auth/local-strategy";
 import "./auth/google-strategy"
+import "./auth/github-strategy"
 import path from "path";
 import { connectSocket } from "./socket";
 import conversationRoutes from "./routes/conversation"

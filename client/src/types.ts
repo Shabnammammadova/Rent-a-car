@@ -7,6 +7,7 @@ export type User = {
     email: string;
     isBlocked: boolean;
     createdAt: string;
+    avatar: string;
     role: UserRole;
 };
 export type Location = {

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import GoogleIcon from "@/assets/images/google-icon.png"
+import GithubIcon from "@/assets/images/github-icon.png"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -122,17 +123,27 @@ export const LoginDialog = () => {
 
                         </form>
                     </Form>
-                    <div className="mt-4 text-center">
+                    <div className="flex flex-col">
                         <button
-                            className="w-[300px] mb-2 mt-2 flex mx-auto  justify-center items-center gap-8 p-2 cursor-pointer border border-solid rounded-3xl  border-inherit"
+                            className="w-[300px] mb-2 mt-2 flex mx-auto  justify-center items-center gap-2  p-2 cursor-pointer border border-solid rounded-3xl  border-inherit font-bold"
                             onClick={() => {
                                 window.location.href = "http://localhost:3000/auth/google";
                             }}
                         >
                             <img src={GoogleIcon} className="w-[1.5rem] h-[1.5rem]" alt="" />
-                            Sign In with Google
+                            Google
+                        </button>
+                        <button
+                            className="w-[300px] mb-2 mt-2 flex mx-auto  justify-center items-center gap-2 p-2 cursor-pointer border border-solid rounded-3xl  border-inherit font-bold"
+                            onClick={() => {
+                                window.location.href = "http://localhost:3000/auth/github";
+                            }}
+                        >
+                            <img src={GithubIcon} className="w-[1.5rem] h-[1.5rem] " alt="" />
+                            Github
                         </button>
                     </div>
+
                 </DialogContent>
             </>
 

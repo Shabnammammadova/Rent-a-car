@@ -23,6 +23,10 @@ const userSchema = new Schema({
         type: String,
         unique: true,
     },
+    githubID: {
+        type: String,
+        unique: true
+    },
     isBlocked: {
         type: Boolean,
         default: false,
@@ -31,6 +35,9 @@ const userSchema = new Schema({
         type: String,
         enum: ["admin", "user"],
         default: "user",
+    },
+    avatar: {
+        type: String
     },
     resetPasswordToken: {
         type: String,

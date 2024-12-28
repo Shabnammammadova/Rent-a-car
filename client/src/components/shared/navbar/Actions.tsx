@@ -50,8 +50,18 @@ export const Actions = () => {
             {user ?
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <button className="rounded-full border border-[#c3d4e966] opacity-80 hover:opacity-100 duration-75 p-2.5">
-                            <User2Icon color="#596780" />
+                        <button className="rounded-full border border-[#c3d4e966]  duration-75 ">
+                            {user.avatar ? (
+                                <img
+                                    src={user.avatar}
+                                    alt="User Avatar"
+                                    className="rounded-full w-10 h-10 object-cover"
+                                />
+                            ) : (
+                                <User2Icon color="#596780" />
+                            )}
+
+
                         </button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>

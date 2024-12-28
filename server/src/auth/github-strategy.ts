@@ -1,5 +1,5 @@
 import passport from "passport";
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import { Strategy as GitHubStrategy, Profile } from "passport-github2";
 import dotenv from "dotenv";
 import crypto from "crypto";
 import bcrypt from "bcrypt";
@@ -9,22 +9,22 @@ import User from "../mongoose/schemas/user";
 dotenv.config();
 
 passport.use(
-    new GoogleStrategy(
+    new GitHubStrategy(
         {
-            clientID: process.env.GOOGLE_CLIENT_ID!,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-            callbackURL: "http://localhost:3000/auth",
+            clientID: process.env.GITHUB_CLIENT_ID!,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+            callbackURL: "http://localhost:3000/auth/github/callback",
         },
-        async (accessToken, refreshToken, profile, done) => {
+        async (accessToken: string, refreshToken: string, profile: Profile, done: any) => {
             try {
-                let user = await User.findOne({ googleID: profile.id });
+                let user = await User.findOne({ githubID: profile.id });
 
                 if (!user) {
                     const randomPassword = crypto.randomBytes(16).toString("hex");
                     const hashedPassword = await bcrypt.hash(randomPassword, 10);
 
                     user = new User({
-                        googleID: profile.id,
+                        githubID: profile.id,
                         name: profile.name?.givenName,
                         surname: profile.name?.familyName ?? profile.name?.givenName,
                         email: profile.emails?.[0]?.value,

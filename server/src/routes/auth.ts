@@ -30,7 +30,14 @@ router.get("/", passport.authenticate("google", { failureRedirect: "/login" }), 
     res.redirect("http://localhost:5173");
 }
 );
+router.get('/github',
+    passport.authenticate('github', { scope: ['user:email'] }));
 
+router.get('/github/callback',
+    passport.authenticate('github', { failureRedirect: '/login' }),
+    function (req, res) {
+        res.redirect('http://localhost:5173');
+    });
 router.post(
     "/forgot-password",
     validateSchema(forgotPasswordSchema),
