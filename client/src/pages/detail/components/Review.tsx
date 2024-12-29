@@ -12,7 +12,7 @@ export const Review = ({ review }: Props) => {
 
     const { author, createdAt, rating, content } = review
     const fullName = `${author.name}`
-    console.log(fullName);
+    // console.log(fullName);
 
     return (
         <div className="flex gap-x-4">
@@ -32,4 +32,3 @@ export const Review = ({ review }: Props) => {
         </div>
     )
 }
-

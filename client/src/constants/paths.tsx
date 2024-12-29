@@ -6,6 +6,7 @@ export const paths = {
     DETAIL: (id = ":id") => `/detail/${id}`,
     PAYMENT: (id = ":id") => `/payment/${id}`,
     RESERVATIONS: "/reservation",
+    PROFILE: "/profile",
     DASHBOARD: {
         MAIN: "/dashboard",
         OVERVIEW: "/overview",
@@ -23,6 +24,10 @@ export const paths = {
         LOCATION: {
             LIST: "/dashboard/location",
             CREATE: "/dashboard/location/create"
+        },
+        CATEGORY: {
+            LIST: "/dashboard/category",
+            CREATE: "/dashboard/category/create"
         },
         CHAT: {
             VIEW: "/dashboard/chat",

@@ -20,6 +20,9 @@ import { ForgotPassword } from "@/pages/forgot-password";
 import { ResetPassword } from "@/pages/reset-password";
 import DashboardLocationPage from "@/pages/(dashboard)/location/list";
 import DashboardCreateLocationPage from "@/pages/(dashboard)/location/create";
+import ProfilePage from "@/pages/profile";
+import DashboardCategoryPage from "@/pages/(dashboard)/category/list";
+import DashboardCreateCategoryPage from "@/pages/(dashboard)/category/create";
 
 
 
@@ -62,6 +65,10 @@ export const router = createBrowserRouter([
                         element: <ReservationPage />
                     }
                 ],
+            },
+            {
+                path: paths.PROFILE,
+                element: <ProfilePage />
             },
             {
                 path: "",
@@ -110,6 +117,14 @@ export const router = createBrowserRouter([
                     {
                         path: paths.DASHBOARD.LOCATION.CREATE,
                         element: <DashboardCreateLocationPage />
+                    },
+                    {
+                        path: paths.DASHBOARD.CATEGORY.LIST,
+                        element: <DashboardCategoryPage />
+                    },
+                    {
+                        path: paths.DASHBOARD.CATEGORY.CREATE,
+                        element: <DashboardCreateCategoryPage />
                     }
                 ]
             }

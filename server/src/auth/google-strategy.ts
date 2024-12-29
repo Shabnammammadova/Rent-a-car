@@ -22,12 +22,12 @@ passport.use(
                 if (!user) {
                     const randomPassword = crypto.randomBytes(16).toString("hex");
                     const hashedPassword = await bcrypt.hash(randomPassword, 10);
-
+                    const defaultEmail = profile.emails?.[0]?.value
                     user = new User({
                         googleID: profile.id,
                         name: profile.name?.givenName,
                         surname: profile.name?.familyName ?? profile.name?.givenName,
-                        email: profile.emails?.[0]?.value,
+                        email: defaultEmail,
                         password: hashedPassword,
                         avatar: profile.photos?.[0]?.value,
                     });

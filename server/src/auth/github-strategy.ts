@@ -23,11 +23,20 @@ passport.use(
                     const randomPassword = crypto.randomBytes(16).toString("hex");
                     const hashedPassword = await bcrypt.hash(randomPassword, 10);
 
+
+
+                    const defaultName = profile.displayName || "Unknown Name";
+                    const defaultEmail = profile.emails?.[0]?.value || `github_${profile.id}@example.com`;
+
+
                     user = new User({
                         githubID: profile.id,
-                        name: profile.name?.givenName,
-                        surname: profile.name?.familyName ?? profile.name?.givenName,
-                        email: profile.emails?.[0]?.value,
+                        name: defaultName.split(" ")[0] || "User",
+                        surname: defaultName.split(" ")[1] || "GitHub",
+                        email: defaultEmail,
+                        // name: profile.name?.givenName,
+                        // surname: profile.name?.familyName ?? profile.name?.givenName,
+                        // email: profile.emails?.[0]?.value,
                         password: hashedPassword,
                         avatar: profile.photos?.[0]?.value,
                     });

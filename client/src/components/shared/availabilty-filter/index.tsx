@@ -39,7 +39,7 @@ export const Availability = () => {
             label: category.name
         }))
     }, [categoryResponse]);
-    console.log("locationOptions", locationOptions);
+
 
     const handleSwap = () => {
         setRotate(!rotate);

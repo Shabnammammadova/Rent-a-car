@@ -157,7 +157,7 @@ const WriteReview = ({ rentId, reservationId }: {
             rentId,
             reservationId,
         })
-        console.log();
+
 
     }
     return (

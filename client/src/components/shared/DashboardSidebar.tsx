@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sidebar"
 import { paths } from "@/constants/paths"
 
-import { Calendar1Icon, CarIcon, ChartNoAxesCombined, Home, LocateIcon, MessageCircle, MessageSquareMoreIcon } from "lucide-react"
+import { Calendar1Icon, CarIcon, ChartNoAxesCombined, Home, LayoutGrid, LocateIcon, MessageCircle, MessageSquareMoreIcon } from "lucide-react"
 
 
 const items = [
@@ -33,6 +33,11 @@ const items = [
         title: "Location",
         url: paths.DASHBOARD.LOCATION.LIST,
         icon: LocateIcon
+    },
+    {
+        title: "Category",
+        url: paths.DASHBOARD.CATEGORY.LIST,
+        icon: LayoutGrid
     },
     {
         title: "Reservations",

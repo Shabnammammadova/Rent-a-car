@@ -21,6 +21,9 @@ import "./auth/github-strategy"
 import path from "path";
 import { connectSocket } from "./socket";
 import conversationRoutes from "./routes/conversation"
+import uploadRoutes from "./routes/upload";
+
+
 
 
 dotenv.config();
@@ -56,7 +59,7 @@ app.use(passport.session());
 
 
 app.use("/public",
-    express.static(path.join(__dirname, "public"))
+    express.static(path.join(__dirname, "../public"))
 )
 
 app.use("/auth", authRoutes);
@@ -66,7 +69,7 @@ app.use("/rent", rentRoutes)
 app.use("/reservation", reservationRoutes)
 app.use("/review", reviewRoutes)
 app.use("/conversation", conversationRoutes)
-
+app.use("/upload", uploadRoutes);
 
 
 server.listen(PORT, () => {

@@ -18,7 +18,7 @@ type Props = {
 }
 
 const List = ({ heading, maxCols = 4, isLoading = false, rents }: Props) => {
-    console.log("Rents prop:", rents);
+
     return (
         <div>
             <div className="flex items-center justify-between py-2.5">

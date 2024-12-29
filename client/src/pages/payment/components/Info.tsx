@@ -104,8 +104,6 @@ export const Info = () => {
             }
     })
     function onSubmit(data: z.infer<typeof FormSchema>) {
-        console.log(data);
-
         const payload = {
             rentId: id!,
             startDate: data.pickUpDate,
