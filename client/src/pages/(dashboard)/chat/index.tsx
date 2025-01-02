@@ -14,17 +14,23 @@ const ChatPage = () => {
     const { id } = useParams()
     const { user } = useSelector(selectUserData)
     const inputRef = useRef<HTMLInputElement>(null)
+    const wrapperRef = useRef<HTMLDivElement>(null)
     const { data: conversationData, isLoading } = useQuery({
         queryKey: [QUERY_KEYS.ADMIN_CONVERSATIONS],
         queryFn: conversationService.getAll
 
     });
-    console.log("getAll response:", conversationData);
+
+    // console.log("getAll response:", conversationData);
+
     const { data: chatData, isLoading: isChatLoading, status } = useQuery({
-        queryKey: [QUERY_KEYS.ADMIN_CHAT, { id }],
+        queryKey: [QUERY_KEYS.ADMIN_CHAT, id],
         queryFn: () => conversationService.getById({ id: id! }),
         enabled: !!id
     })
+    // console.log("useParams id:", id);
+
+    // console.log("chatData", chatData);
     const [messages, setMessages] = useState<{ text: string; userId: string, createdAt: string }[]>([])
 
 
@@ -33,17 +39,33 @@ const ChatPage = () => {
     useEffect(() => {
         if (!socket) return;
         socket.on("message", (message) => {
+            if (message.conversation !== id) return
             console.log(message);
 
         })
     }, [socket])
 
 
+
+
+    useEffect(() => {
+        if (wrapperRef.current) {
+            wrapperRef.current.scrollTo({
+                top: wrapperRef.current.scrollHeight,
+                behavior: "smooth"
+            })
+        }
+    }, [messages])
+
+
+
+
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         if (!socket) return;
         e.preventDefault();
         const message = inputRef.current?.value.trim();
-        const to = chatData?.data?.items?.userId;
+        const to = chatData?.data?.item?.userId;
         const from = user?._id;
         if (!message || !to || !from) return;
         inputRef.current!.value = "";
@@ -56,14 +78,31 @@ const ChatPage = () => {
 
     useEffect(() => {
         if (status === "success" && chatData) {
-            setMessages(chatData.data?.items?.messages || [])
+            setMessages(chatData.data?.item?.messages || [])
         }
-    }, [status])
+    }, [chatData])
 
+
+
+    // console.log("chatData", chatData);
+    // console.log("chatData.data", chatData?.data);
+    // console.log("chatData.data.items", chatData?.data?.item);
+    // console.log("chatData.data.items.messages", chatData?.data?.item?.messages);
+
+
+
+    useEffect(() => {
+        if (!socket) return;
+        socket.on("message", (message) => {
+            if (message.conversation !== window.location.pathname.split("/").pop()) return;
+            setMessages((prev) => [...prev, message])
+            console.log(message);
+        })
+    }, [socket])
 
     if (isLoading || isChatLoading) return <div>Loading...</div>
 
-    console.log("conversation", conversationData);
+    // console.log("conversation", conversationData);
 
     const conversations = conversationData?.data?.items || []
 
@@ -100,13 +139,12 @@ const ChatPage = () => {
                     >
                         <div className="h-20 w-20 rounded-full border overflow-hidden">
                             <img
-                                src="https://avatars3.githubusercontent.com/u/2763884?s=128"
+                                src="https://i.pinimg.com/736x/09/21/fc/0921fc87aa989330b8d403014bf4f340.jpg"
                                 alt="Avatar"
                                 className="h-full w-full"
                             />
                         </div>
-                        <div className="text-sm font-semibold mt-2">Aminos Co.</div>
-                        <div className="text-xs text-gray-500">Lead UI/UX Designer</div>
+                        <div className="text-sm font-semibold mt-2">Admin</div>
                         <div className="flex flex-row items-center mt-3">
                             <div
                                 className="flex flex-col justify-center h-4 w-8 bg-indigo-500 rounded-full"
@@ -128,6 +166,7 @@ const ChatPage = () => {
                             {
                                 conversations.map((conversation) => (
                                     <Link to={paths.DASHBOARD.CHAT.USER(conversation._id)}
+                                        key={conversation._id}
                                         className="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
                                         style={{
                                             backgroundColor: id === conversation._id ? "#f1f1f1" : ""
@@ -157,9 +196,11 @@ const ChatPage = () => {
 
                         <RenderIf condition={!!id}>
 
-                            <div className="flex flex-col h-full overflow-x-auto mb-4">
+                            <div
+                                ref={wrapperRef} className="flex flex-col h-full overflow-x-auto mb-4">
                                 <div className="flex flex-col h-full">
-                                    <div className="grid grid-cols-12 gap-y-2 max-h-[640px]">
+                                    <div
+                                        className="grid grid-cols-12 gap-y-2 max-h-[640px]">
 
                                         {
                                             messages.map((message, idx) => (

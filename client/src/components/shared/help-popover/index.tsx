@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { RenderIf } from "../RenderIf"
 import { User2Icon } from "lucide-react";
-import { useLocation } from "react-router-dom";
 import { useSocket } from "@/hooks/use-socket";
 import { useSelector } from "react-redux";
 import { selectUserData } from "@/store/features/userSlice";
@@ -18,10 +17,10 @@ export const HelpPopover = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [userId, setUserId] = useState("")
-    const location = useLocation()
     const { user, loading } = useSelector(selectUserData)
     const socket = useSocket()
     const inputRef = useRef<HTMLInputElement>(null)
+    const wrapperRef = useRef<HTMLDivElement>(null)
     const { data: conversationData, isLoading: conversationLoading, status } = useQuery({
         queryKey: [QUERY_KEYS.USER_CONVERSATION],
         queryFn: () => conversationService.getByUserId({ userId }),
@@ -47,6 +46,7 @@ export const HelpPopover = () => {
     useEffect(() => {
         if (!socket) return;
         socket.on("message", (message) => {
+            setMessages((prev) => [...prev, message])
             console.log(message);
 
         })
@@ -62,15 +62,22 @@ export const HelpPopover = () => {
 
     useEffect(() => {
         if (status === "success" && conversationData) {
-            setMessages(conversationData.data?.items?.messages ?? [])
+            setMessages(conversationData.data?.item?.messages ?? [])
         }
     }, [status])
     console.log("conversationdata", conversationData);
 
+    useEffect(() => {
+        if (wrapperRef.current && isOpen) {
+            wrapperRef.current.scrollTo({
+                top: wrapperRef.current.scrollHeight,
+                behavior: "smooth"
+            })
+        }
+    }, [messages, isOpen])
 
-    if (location.pathname.includes("dasboard")) {
-        return null
-    }
+
+
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         if (!socket) return;
@@ -124,7 +131,9 @@ export const HelpPopover = () => {
                         </RenderIf>
 
                         <RenderIf condition={!!conversationData}>
-                            <div className="pr-4 h-[474px] overflow-y-auto" style={{ minWidth: "100%" }}>
+                            <div
+                                ref={wrapperRef}
+                                className="pr-4 h-[474px] overflow-y-auto" style={{ minWidth: "100%" }}>
                                 {
                                     messages.map((message) => (
                                         <MessageItem owner={message.userId === userId ? "You" : "Admin"} message={message.text} />

@@ -7,7 +7,9 @@ const getAll = async () => {
 
 const getByUserId = async ({ userId }: { userId: string }) => {
     return await axiosInstance.get<GetConversationType>(`/conversation/user/${userId}`)
+
 }
+
 
 const getById = async ({ id }: { id: string }) => {
     return await axiosInstance.get<GetConversationType>(`/conversation/${id}`)

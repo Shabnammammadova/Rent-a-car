@@ -24,7 +24,10 @@ async function onMessage({ message, to, from }: { message: string; to: string, f
                 { userId: from },
                 { userId: to }
             ]
-        }).populate('messages')
+        })
+        // console.log("Socket ID:", socketId);
+        // console.log("Message received:", { message, to, from });
+        // console.log("Conversation found:", conversation);
 
 
         if (!conversation) return

@@ -13,9 +13,6 @@ export function connectSocket(
     });
 
 
-
-
-
     io.on('connection', socketHandlers);
 
 }

@@ -3,7 +3,7 @@ import { Conversation } from "@/types";
 
 
 export type GetConversationType = {
-    items: Conversation;
+    item: Conversation;
     message: string
 }
 

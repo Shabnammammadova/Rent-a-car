@@ -16,8 +16,15 @@ export const useSocket = () => {
             withCredentials: true
         });
 
-        newSocket.emit("register", id)
-        setSocket(newSocket);
+
+        newSocket.on("connect", () => {
+            newSocket.emit("register", id)
+            setSocket(newSocket);
+        })
+
+        return () => {
+            newSocket.disconnect()
+        }
     }, [loading]);
 
     useEffect(() => {

@@ -21,7 +21,7 @@ const getByUserId = async (req: Request, res: Response) => {
         if (req.isAuthenticated()) {
             userId = req.user._id.toString()
         }
-
+        console.log("UserId:", userId);
         const conversation = await Conversation.findOne({
             userId
         }).populate("messages")
@@ -47,6 +47,8 @@ const getByUserId = async (req: Request, res: Response) => {
 const getById = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
+        console.log("Conversation ID:", id);
+
         const conversation = await Conversation.findById(id).populate("messages");
         if (!conversation) {
             res.status(404).json({
